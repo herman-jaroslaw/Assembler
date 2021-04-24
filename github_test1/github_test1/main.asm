@@ -12,3 +12,4 @@ start:
     rjmp start
 
 	lds r16, 5
+	lds r17, 2
