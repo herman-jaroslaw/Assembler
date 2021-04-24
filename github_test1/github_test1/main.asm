@@ -15,3 +15,4 @@ start:
 	lds r17, 2
 	lds r18, 5
 	;cosik
+	no i gitara zmieniam projekta tylko pullne czy cos tam
