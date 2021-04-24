@@ -13,3 +13,4 @@ start:
 
 	lds r16, 5
 	lds r17, 2
+	lds r18, 5
