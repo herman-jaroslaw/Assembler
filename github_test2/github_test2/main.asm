@@ -11,3 +11,6 @@ start:
     inc r16
     rjmp start
 	;cosik zmieniam
+
+
+	;;; halllo 
