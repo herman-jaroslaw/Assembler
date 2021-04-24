@@ -19,3 +19,5 @@ start:
 	
 
 	; i znowu zmiana
+
+	; i zmieniam
