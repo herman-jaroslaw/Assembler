@@ -13,10 +13,9 @@ start:
 
 	lds r16, 5
 	lds r17, 2
-<<<<<<< Updated upstream
 	lds r18, 5
 	;cosik
 	no i gitara zmieniam projekta tylko pullne czy cos tam
-=======
-	lds r18, 3
->>>>>>> Stashed changes
+	
+
+	; i znowu zmiana
