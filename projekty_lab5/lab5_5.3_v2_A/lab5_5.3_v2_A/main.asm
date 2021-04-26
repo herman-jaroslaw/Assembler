@@ -18,9 +18,9 @@
 
 prog_start: 
 	ldi r16, $ff    
-	out ddre, r16 ;sterowanie wyswietlaczem    
-	out ddrd, r16 ;wyswietlanie
-	out ddrb, r16  ;diody
+	out ddre, r16 ;sterowanie wyswietlaczem		;STEROWANIE - port E
+	out ddrd, r16 ;wyswietlanie					;DISPLAY - port D	
+	out ddrb, r16  ;diody						;DIODY - port B
 
 	///21370
 	ldi r16, 0//mlodsze									
@@ -31,17 +31,17 @@ prog_start:
 	sbci r17,low(38)
     brvs przepelnienie
 	brpl znak
-znak:
+znak:													;dioda znaku
 	brvs obie
         ldi r22, 0b100000
         out portb, r22
 		rjmp licznik
-przepelnienie:
+przepelnienie:											;dioda przepe³nienia
 	brpl obie
         ldi r23, 0b000100
         out portb, r23
 		rjmp licznik
-obie:
+obie:													; dioda przepe³nienia + znaku
        ldi r23, 0b100100
        out portb, r23
 	
