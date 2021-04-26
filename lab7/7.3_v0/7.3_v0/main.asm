@@ -40,16 +40,47 @@ start:
 
 		;Global Enable Interrupt
 		Sei
-;----------------------------------------------------------------------------------- ;Set up infinite loop loop:
-call led_display rjmp loop
-;----------------------------------------------------------------------------------- ;Keypad Interrupt Service Routine keypad_ISR:
-;Set rows as outputs and columns as inputs ldi r20, 0x???? out ddrc, r20
-13/13
-;Set columns to high (pull ups) and rows to low ldi r20, 0x???? out portc, r20
-;Read Port C. Columns code in low nibble in r16, pinc
-;Store columns code to r18 on low nibble mov r18, r16 andi r18, 0x0f
-;Set rows as inputs and columns as outputs ldi r20, ???? out ddrc, r20
-;Set rows to high (pull ups) and columns to low ldi r20, ????? out portc, r20
-;Read Port C. Rows code in high nibble in r16, pinc
-;Merge with previous read andi r16, 0x30 add r18, r16
-reti ;----------------------------------------------------------------------------------- ;display value from r18 on leds led_display: out portb,r18 ret
+;----------------------------------------------------------------------------------- 
+;Set up infinite loop 
+loop:
+		call led_display 
+		rjmp loop
+;----------------------------------------------------------------------------------- 
+;Keypad Interrupt Service Routine 
+keypad_ISR:
+		;Set rows as outputs and columns as inputs 
+		ldi r20, 0x???? 
+		out ddrc, r20
+
+		;Set columns to high (pull ups) and rows to low 
+		ldi r20, 0x???? 
+		out portc, r20
+
+		;Read Port C. Columns code in low nibble 
+		in r16, pinc
+
+		;Store columns code to r18 on low nibble 
+		mov r18, r16 
+		andi r18, 0x0f
+
+		;Set rows as inputs and columns as outputs 
+		ldi r20, ???? 
+		out ddrc, r20
+
+		;Set rows to high (pull ups) and columns to low 
+		ldi r20, ????? 
+		out portc, r20
+
+		;Read Port C. Rows code in high nibble 
+		in r16, pinc
+
+		;Merge with previous read 
+		andi r16, 0x30 
+		add r18, r16
+
+		reti 
+;----------------------------------------------------------------------------------- 
+;display value from r18 on leds 
+led_display: 
+	out portb,r18 
+	ret
