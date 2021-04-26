@@ -1,16 +1,18 @@
+;7.3_v0
+
 .include"m328pbdef.inc"
 .cseg 
 .org 0 
 		jmp start
-.org ?????? 
+.org INT1addr
 		rjmp keypad_ISR ;Keypad External Interrupt Request
 ;----------------------------------------------------------------------------------- 
 ;Initialization
 start:
 		; Set Stack Pointer to top of RAM
-		ldi r16, high(?????) 
+		ldi r16, high(ramend) 
 		out SPH, r16 
-		ldi r16, low(??????) 
+		ldi r16, low(ramend) 
 		out SPL, r16
 
 		;SET UP 6 LEDS 
@@ -28,7 +30,7 @@ start:
 		out portc, r20
 
 		;Select rows as interrupt triggers 
-		ldi r20, (1<<pcint??)|(1<<pcint??) 
+		ldi r20, (1<<pcint8)|(1<<pcint9)						;8 i 9 dobre ???
 		sts pcmsk1, r20
 
 		;Enable pcint1 
@@ -49,11 +51,11 @@ loop:
 ;Keypad Interrupt Service Routine 
 keypad_ISR:
 		;Set rows as outputs and columns as inputs 
-		ldi r20, 0x???? 
+		ldi r20, 0xf0													;0xf0 da³em tak jak u KB -> ???
 		out ddrc, r20
 
 		;Set columns to high (pull ups) and rows to low 
-		ldi r20, 0x???? 
+		ldi r20, 0x0f													; j. w. 
 		out portc, r20
 
 		;Read Port C. Columns code in low nibble 
@@ -64,7 +66,7 @@ keypad_ISR:
 		andi r18, 0x0f
 
 		;Set rows as inputs and columns as outputs 
-		ldi r20, ???? 
+		ldi r20, 0x0f													; j. w. 
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
