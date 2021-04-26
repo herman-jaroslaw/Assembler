@@ -10,8 +10,8 @@
 
 .org 0 
 	jmp main ;skip vector table 
-.org INT0addr
-	jmp int0_isr 
+.org PCINT0addr
+	jmp pin_change_interrupt_0
 ;------- main ---------- 
 main: 
 	ldi r16, LOW(RAMEND) ;initialize stack for ISR 
@@ -20,7 +20,7 @@ main:
 	out sph, r16 
 
 	sbi ddrb, 5 ;portb.5 is output (led0) 
-	sbi portb, 7 ;pull-up enable for portd.2 
+	sbi portd, 2 ;pull-up enable for portd.2 
 	ldi r20, (1<<int0) 
 	out eimsk, r20 ;enable int0 
 	ldi r20, (1<<isc01)|(0<<isc00)
@@ -29,7 +29,7 @@ main:
 stop: 
 	jmp stop ;stay forever 
 ;------- int0 ISR ------- 
-int0_isr: 
+pin_change_interrupt_0: 
 	in r21, pinb ;read portb
 	ldi r22, 0x20 
 	eor r21, r22 ;toggle bit 5 
