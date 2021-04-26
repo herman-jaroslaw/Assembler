@@ -43,7 +43,7 @@ przepelnienie:
 		rjmp licznik
 obie:
        ldi r23, 0b100100
-        out portb, r23
+       out portb, r23
 	
 	//////////////////////////licznik 
 licznik: 
