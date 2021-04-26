@@ -6,7 +6,10 @@
 ;
 
 
-; Replace with your application code
 start:
-    inc r16
-    rjmp start
+		ldi r16, -9
+		ldi r17, 0b10001001
+		ldi r16, -57
+		ldi r16, -101
+
+	
