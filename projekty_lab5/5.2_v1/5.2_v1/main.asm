@@ -26,10 +26,18 @@ add r20, r21 ;binary: 0b 1010 0110; U2: 0b 0101 1010; wynik = 90
 ; Ustawione flagi: S, C
 ;unsigned: 166 (a+b); signed: 346 (c+d)
 
+ldi r20, -70 ;binary: 0b 0100 0110 [a]; U2: 0b 1011 1010 [c]
+ldi r21, -96 ;binary: 0b 0110 0000 [b]; U2: 0b 1010 0000 [d]
+add r20, r21 ;binary: 0b 1010 0110; U2: 0b 0101 1010; wynik = 90
+ldi r22, 0
+adc r22, r22
+; Ustawione flagi: S, C
+;unsigned: 166 (a+b); signed: 346 (c+d) = 255 + 90
+
 ldi r20, -126
 ldi r21, 30
 add r20, r21
-; Ustawione flagi: H, N
+; Ustawione flagi: H, S, N
 
 ldi r20, 126
 ldi r21, -6
