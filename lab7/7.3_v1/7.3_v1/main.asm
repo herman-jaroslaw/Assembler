@@ -1,4 +1,4 @@
-; zad_7_3.asm
+;7.3_v1_KB
 
 .include"m328pbdef.inc"
 
