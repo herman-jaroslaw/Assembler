@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v3\5.3_v3\main.asm Mon Apr 26 18:52:33 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v3\5.3_v3\main.asm Mon Apr 26 19:12:28 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1577,13 +1577,11 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003c b90a                      	out ddrd, r16 ;wyswietlanie					;DISPLAY - port D	
 00003d b904                      	out ddrb, r16  ;diody						;DIODY - port B
                                  
-                                 	///21370
-00003e e000                      	ldi r16, 0			;M£ODSZE									
-00003f e216                      	ldi r17, low(38)	;STARSZE	;0b 0010 0110							
+00003e e00f                      	ldi r16, low(15)	;M£ODSZE									
+00003f e010                      	ldi r17, high(15)	;STARSZE
                                  	
-                                 	///14959
-000040 5000                      	subi r16, 0			;M£ODSZE	
-000041 4010                      	sbci r17, high(15) 	;STARSZE	
+000040 5206                      	subi r16, low(38)	;M£ODSZE	
+000041 4010                      	sbci r17, high(38)	;STARSZE
 000042 f02b                          brvs przepelnienie				
 000043 f402                      	brpl znak						
                                  znak:													;dioda znaku

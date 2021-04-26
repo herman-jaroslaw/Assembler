@@ -22,13 +22,11 @@ prog_start:
 	out ddrd, r16 ;wyswietlanie					;DISPLAY - port D	
 	out ddrb, r16  ;diody						;DIODY - port B
 
-	///21370
-	ldi r16, 0			;M£ODSZE									
-	ldi r17, low(38)	;STARSZE	;0b 0010 0110							
+	ldi r16, low(15)	;M£ODSZE									
+	ldi r17, high(15)	;STARSZE
 	
-	///14959
-	subi r16, 0			;M£ODSZE	
-	sbci r17, high(15) 	;STARSZE	
+	subi r16, low(38)	;M£ODSZE	
+	sbci r17, high(38)	;STARSZE
     brvs przepelnienie				
 	brpl znak						
 znak:													;dioda znaku
