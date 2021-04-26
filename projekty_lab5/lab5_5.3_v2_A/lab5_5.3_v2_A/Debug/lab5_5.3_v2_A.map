@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Thu Apr 22 19:36:05 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Mon Apr 26 18:38:18 2021
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1146,21 +1146,21 @@ EQU  TIMER4_COMPAaddr 00000054
 EQU  TIMER4_COMPBaddr 00000056
 EQU  TIMER4_OVFaddr 00000058
 EQU  INT_VECTORS_SIZE 0000005a
-CSEG prog_start   0000003b
+CSEG prog_start   0000003a
 CSEG prime        00000032
 DSEG var1         00000100
 DSEG var2         00000101
 DSEG var3         00000102
-CSEG przepelnienie 00000049
-CSEG znak         00000045
-CSEG obie         0000004d
-CSEG licznik      0000004f
-CSEG wyswietlanie 00000052
-CSEG petla        00000053
-CSEG wait_sec     00000088
-CSEG seg1         0000009d
-CSEG loop1        0000008e
-CSEG loop2        0000008f
-CSEG loop3        00000090
-CSEG noswap       000000ae
-CSEG stop         000000b8
+CSEG przepelnienie 00000048
+CSEG znak         00000044
+CSEG obie         0000004c
+CSEG licznik      0000004e
+CSEG wyswietlanie 00000051
+CSEG petla        00000052
+CSEG wait_sec     00000087
+CSEG seg1         0000009c
+CSEG loop1        0000008d
+CSEG loop2        0000008e
+CSEG loop3        0000008f
+CSEG noswap       000000ad
+CSEG stop         000000b7

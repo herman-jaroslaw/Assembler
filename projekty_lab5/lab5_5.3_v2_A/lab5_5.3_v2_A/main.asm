@@ -8,7 +8,7 @@
 //////////////////////////////   
 	rjmp prog_start     
     .org 0x32  
-	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47, 0x47 	   
+	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47	   
  .DSEG 
 .ORG 0x100 
 	var1: .BYTE 1  
@@ -24,12 +24,12 @@ prog_start:
 
 	///21370
 	ldi r16, 0//mlodsze									
-	ldi r17, high(15)	//starsze								
+	ldi r17, high(15)	//starsze	;high(15) bierze pierwsze 4 bity liczby 15 (0b00001111), czyli 0							
 	
 	///14959
-	subi r16,0					
-	sbci r17,low(38)
-    brvs przepelnienie
+	subi r16, 0					
+	sbci r17, low(38)				;low(38) bierze drugie 4 bity liczby 38 (0b00100110), czyli 6
+    brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010
 	brpl znak
 znak:													;dioda znaku
 	brvs obie

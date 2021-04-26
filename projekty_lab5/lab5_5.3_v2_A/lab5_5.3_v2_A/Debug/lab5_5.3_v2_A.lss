@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Thu Apr 22 19:36:05 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Mon Apr 26 18:38:18 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
                                  
-                                 .CSEG 
+                                 ;5.3_A
                                  
                                  
                                  ;*************************************************************************
@@ -1547,13 +1547,14 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5
                                  
                                  
                                  
+                                 .CSEG 
                                  .ORG 0 
 000000 e008                      	ldi R16, HIGH(RAMEND)    
 000001 bf0e                      	out SPH, R16    
 000002 ef0f                      	ldi R16, LOW(RAMEND)    
 000003 bf0d                      	out SPL, R16    
                                  //////////////////////////////   
-000004 c036                      	rjmp prog_start     
+000004 c035                      	rjmp prog_start     
                                      .org 0x32  
 000032 307e
 000033 796d
@@ -1562,9 +1563,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5
 000036 7b7f
 000037 1f77
 000038 3d4e
-000039 474f
-C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm(10): warning: .cseg .db misalignment - padding zero byte
-00003a 0047                      	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47, 0x47 	   
+000039 474f                      	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47	   
                                   .DSEG 
                                  .ORG 0x100 
 000100                           	var1: .BYTE 1  
@@ -1573,139 +1572,139 @@ C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2
                                  	.CSEG 
                                  
                                  prog_start: 
-00003b ef0f                      	ldi r16, $ff    
-00003c b90d                      	out ddre, r16 ;sterowanie wyswietlaczem    
-00003d b90a                      	out ddrd, r16 ;wyswietlanie
-00003e b904                      	out ddrb, r16  ;diody
+00003a ef0f                      	ldi r16, $ff    
+00003b b90d                      	out ddre, r16 ;sterowanie wyswietlaczem		;STEROWANIE - port E
+00003c b90a                      	out ddrd, r16 ;wyswietlanie					;DISPLAY - port D	
+00003d b904                      	out ddrb, r16  ;diody						;DIODY - port B
                                  
                                  	///21370
-00003f e000                      	ldi r16, 0//mlodsze									
-000040 e010                      	ldi r17, high(15)	//starsze								
+00003e e000                      	ldi r16, 0//mlodsze									
+00003f e010                      	ldi r17, high(15)	//starsze	;high(15) bierze pierwsze 4 bity liczby 15 (0b00001111), czyli 0							
                                  	
                                  	///14959
-000041 5000                      	subi r16,0					
-000042 4216                      	sbci r17,low(38)
-000043 f02b                          brvs przepelnienie
-000044 f402                      	brpl znak
-                                 znak:
-000045 f03b                      	brvs obie
-000046 e260                              ldi r22, 0b100000
-000047 b965                              out portb, r22
-000048 c006                      		rjmp licznik
-                                 przepelnienie:
-000049 f41a                      	brpl obie
-00004a e074                              ldi r23, 0b000100
-00004b b975                              out portb, r23
-00004c c002                      		rjmp licznik
-                                 obie:
-00004d e274                             ldi r23, 0b100100
-00004e b975                              out portb, r23
+000040 5000                      	subi r16, 0					
+000041 4216                      	sbci r17, low(38)				;low(38) bierze drugie 4 bity liczby 38 (0b00100110), czyli 6
+000042 f02b                          brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010
+000043 f402                      	brpl znak
+                                 znak:													;dioda znaku
+000044 f03b                      	brvs obie
+000045 e260                              ldi r22, 0b100000
+000046 b965                              out portb, r22
+000047 c006                      		rjmp licznik
+                                 przepelnienie:											;dioda przepe³nienia
+000048 f41a                      	brpl obie
+000049 e074                              ldi r23, 0b000100
+00004a b975                              out portb, r23
+00004b c002                      		rjmp licznik
+                                 obie:													; dioda przepe³nienia + znaku
+00004c e274                             ldi r23, 0b100100
+00004d b975                             out portb, r23
                                  	
                                  	//////////////////////////licznik 
                                  licznik: 
-00004f 940e 0052                 	call wyswietlanie 
-000051 cfe9                      	rjmp prog_start 
+00004e 940e 0051                 	call wyswietlanie 
+000050 cfe9                      	rjmp prog_start 
                                  wyswietlanie: 
-000052 e024                      	ldi r18, 4 ; 1/5s
+000051 e024                      	ldi r18, 4 ; 1/5s
                                  	petla: 
-000053 940e 0088                 		call wait_sec 
-000055 952a                      		dec r18 
-000056 f7e1                      	brne petla 
+000052 940e 0087                 		call wait_sec 
+000054 952a                      		dec r18 
+000055 f7e1                      	brne petla 
                                  ;seg1 
-000057 e031                      		ldi r19,0x01 
-000058 e041                      		ldi r20,1 
-000059 9330 0100                 		sts var1, r19 ;odczyt danych z pamiêci, zapisanie w  rejestrze ogólnego przeznaczenia
-00005b 9340 0101                 		sts var2, r20 
-00005d 9300 0102                 		sts var3, r16
-00005f 940e 009d                 		call seg1  
-000061 940e 0088                 			call wait_sec 
+000056 e031                      		ldi r19,0x01 
+000057 e041                      		ldi r20,1 
+000058 9330 0100                 		sts var1, r19 ;odczyt danych z pamiêci, zapisanie w  rejestrze ogólnego przeznaczenia
+00005a 9340 0101                 		sts var2, r20 
+00005c 9300 0102                 		sts var3, r16
+00005e 940e 009c                 		call seg1  
+000060 940e 0087                 			call wait_sec 
                                  ;seg2 
-000063 e032                      		ldi r19,0x02 
-000064 e040                      		ldi r20,0
-000065 9330 0100                 		sts var1, r19 
-000067 9340 0101                 		sts var2, r20 
-000069 9300 0102                 		sts var3, r16
-00006b 940e 009d                 		call seg1 
-00006d 940e 0088                 			call wait_sec 
+000062 e032                      		ldi r19,0x02 
+000063 e040                      		ldi r20,0
+000064 9330 0100                 		sts var1, r19 
+000066 9340 0101                 		sts var2, r20 
+000068 9300 0102                 		sts var3, r16
+00006a 940e 009c                 		call seg1 
+00006c 940e 0087                 			call wait_sec 
                                  ;seg3 
-00006f e034                      		ldi r19,0x04 
-000070 e041                      		ldi r20,1
-000071 9330 0100                 		sts var1, r19 
-000073 9340 0101                 		sts var2, r20 
-000075 9310 0102                 		sts var3, r17
-000077 940e 009d                 		call seg1 
-000079 940e 0088                 			call wait_sec 
+00006e e034                      		ldi r19,0x04 
+00006f e041                      		ldi r20,1
+000070 9330 0100                 		sts var1, r19 
+000072 9340 0101                 		sts var2, r20 
+000074 9310 0102                 		sts var3, r17
+000076 940e 009c                 		call seg1 
+000078 940e 0087                 			call wait_sec 
                                  ;seg4 
-00007b e038                      		ldi r19,0x08 
-00007c e040                      		ldi r20,0 
-00007d 9330 0100                 		sts var1, r19 
-00007f 9340 0101                 		sts var2, r20	
-000081 9310 0102                 		sts var3, r17
-000083 940e 009d                 		call seg1 
-000085 940e 0088                 			call wait_sec 
-000087 9508                      	ret 
+00007a e038                      		ldi r19,0x08 
+00007b e040                      		ldi r20,0 
+00007c 9330 0100                 		sts var1, r19 
+00007e 9340 0101                 		sts var2, r20	
+000080 9310 0102                 		sts var3, r17
+000082 940e 009c                 		call seg1 
+000084 940e 0087                 			call wait_sec 
+000086 9508                      	ret 
                                  
                                  ;delay 
                                  wait_sec:   
-000088 930f                      	push r16   
-000089 931f                      	push r17   
-00008a 932f                      	push r18   
-00008b 933f                      	push r19   
-00008c e001                      	ldi r16,1  
-00008d e015                      		ldi r17,5
+000087 930f                      	push r16   
+000088 931f                      	push r17   
+000089 932f                      	push r18   
+00008a 933f                      	push r19   
+00008b e001                      	ldi r16,1  
+00008c e015                      		ldi r17,5
                                  		loop1:   
-00008e e129                      		ldi r18, 25
+00008d e129                      		ldi r18, 25
                                  			loop2:   
-00008f e634                      			ldi r19, 100
+00008e e634                      			ldi r19, 100
                                  				loop3:   
-000090 953a                      				dec r19   
-000091 f7f1                      				brne loop3	   
-000092 952a                      			dec r18   
-000093 f7d9                      			brne loop2   
-000094 951a                      		dec r17  
-000095 f7c1                      		brne loop1   
-000096 950a                      	dec r16     
-000097 f781                      	brne wait_sec   
-000098 913f                      pop r19  
-000099 912f                      pop r18   
-00009a 911f                      pop r17   
-00009b 910f                      pop r16   
+00008f 953a                      				dec r19   
+000090 f7f1                      				brne loop3	   
+000091 952a                      			dec r18   
+000092 f7d9                      			brne loop2   
+000093 951a                      		dec r17  
+000094 f7c1                      		brne loop1   
+000095 950a                      	dec r16     
+000096 f781                      	brne wait_sec   
+000097 913f                      pop r19  
+000098 912f                      pop r18   
+000099 911f                      pop r17   
+00009a 910f                      pop r16   
                                  
-00009c 9508                      Ret  
+00009b 9508                      Ret  
                                  
                                  
                                     
                                  seg1:							   
-00009d 930f                      	push r16 
-00009e 931f                      	push r17 
-00009f 932f                      	push r18  
+00009c 930f                      	push r16 
+00009d 931f                      	push r17 
+00009e 932f                      	push r18  
                                  
-0000a0 e6e4                      	ldi zl, low(2*prime) 
-0000a1 e0f0                      	ldi zh, high(2*prime)    
+00009f e6e4                      	ldi zl, low(2*prime) 
+0000a0 e0f0                      	ldi zh, high(2*prime)    
                                  
-0000a2 9100 0100                 	lds r16, var1 ;select display
-0000a4 9500                      	com r16                     
-0000a5 b90e                      	out porte, r16  
+0000a1 9100 0100                 	lds r16, var1 ;select display
+0000a3 9500                      	com r16                     
+0000a4 b90e                      	out porte, r16  
                                  
-0000a6 e000                      	ldi r16, 0 ;select hex
-0000a7 9120 0101                 	lds r18, var2 
-0000a9 1720                      	cp r18, r16 
-0000aa 9110 0102                 	lds r17, var3
-0000ac f409                      	brne noswap 
-0000ad 9512                      	swap r17  
+0000a5 e000                      	ldi r16, 0 ;select hex
+0000a6 9120 0101                 	lds r18, var2 
+0000a8 1720                      	cp r18, r16 
+0000a9 9110 0102                 	lds r17, var3
+0000ab f409                      	brne noswap 
+0000ac 9512                      	swap r17  
                                  noswap: 
-0000ae 701f                      	andi r17, 0x0f  
-0000af 0fe1                      	add zl, r17  
-0000b0 1ff0                      	adc zh, r16 
-0000b1 9104                      	lpm r16, z  
-0000b2 9500                      	com r16  
-0000b3 b90b                      	out portd, r16 
+0000ad 701f                      	andi r17, 0x0f  
+0000ae 0fe1                      	add zl, r17  
+0000af 1ff0                      	adc zh, r16 
+0000b0 9104                      	lpm r16, z  
+0000b1 9500                      	com r16  
+0000b2 b90b                      	out portd, r16 
                                  
-0000b4 912f                      	pop r18 
-0000b5 911f                      	pop r17  
-0000b6 910f                      	pop r16  
+0000b3 912f                      	pop r18 
+0000b4 911f                      	pop r17  
+0000b5 910f                      	pop r16  
                                  
-0000b7 9508                      	ret  
+0000b6 9508                      	ret  
 
 
 RESOURCE USE INFORMATION
@@ -1755,8 +1754,8 @@ Instructions used: 22 out of 113 (19.5%)
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000172    262     18    280   32768   0.9%
+[.cseg] 0x000000 0x000170    262     16    278   32768   0.8%
 [.dseg] 0x000100 0x000103      0      3      3    2048   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
-Assembly complete, 0 errors, 1 warnings
+Assembly complete, 0 errors, 0 warnings
