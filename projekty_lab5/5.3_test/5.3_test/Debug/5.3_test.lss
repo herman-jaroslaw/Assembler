@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_test\5.3_test\main.asm Mon Apr 26 19:00:19 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_test\5.3_test\main.asm Mon Apr 26 19:17:21 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
                                  
@@ -1552,8 +1552,16 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  ; Author : Jaro
                                  ;
                                  
-000000 ed22                      ldi r18, low(1234) ; r19:r18 is an unsigned two-byte integer
-000001 e034                      ldi r19, high(1234)
+                                 
+000000 ed22                      ldi r18, low(1234) ; r19:r18 is an unsigned two-byte integer	;DEC 1234 = BIN 0000 0100 1101 0010 -> LOW = BIN 1101 0010 = DEC 210 
+000001 e034                      ldi r19, high(1234)												;HIGH = BIN 0000 0100 = DEC 4
+000002 9536                      lsr r19 ; Divide r19:r18 by two
+                                 
+000003 e000                      ldi r16, 0			;M£ODSZE									
+000004 e010                      ldi r17, high(15)	;STARSZE	;high(15) bierze pierwsze 8 bitów 16-bitowej liczby 15 (0b 0000 0000 0000 1111), czyli 0							
+                                 								
+000005 5000                      subi r16, 0			;M£ODSZE	
+000006 4216                      sbci r17, low(38)	;STARSZE	;low(38) bierze drugie 8 bitów 16-bitowej liczby 38 (0b 0000 0000 0010 0110), czyli 38
 
 
 RESOURCE USE INFORMATION
@@ -1573,10 +1581,10 @@ counted separately from r26..r31 here.
 "ATmega328PB" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   0 r17:   0 r18:   1 r19:   2 r20:   0 
+r13:   0 r14:   0 r15:   0 r16:   2 r17:   2 r18:   1 r19:   2 r20:   0 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 2 out of 35 (5.7%)
+Registers used: 4 out of 35 (11.4%)
 
 "ATmega328PB" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
@@ -1589,21 +1597,21 @@ clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
 cpi   :   0 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :   2 lds   :   0 lpm   :   0 lsl   :   0 
+ld    :   0 ldd   :   0 ldi   :   4 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   1 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   0 pop   :   0 
 push  :   0 rcall :   0 ret   :   0 reti  :   0 rjmp  :   0 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+ror   :   0 sbc   :   0 sbci  :   1 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
-sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 2 out of 113 (1.8%)
+sub   :   0 subi  :   1 swap  :   0 tst   :   0 wdr   :   0 
+Instructions used: 4 out of 113 (3.5%)
 
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000006      6      0      6   32768   0.0%
+[.cseg] 0x000000 0x00000e     14      0     14   32768   0.0%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
