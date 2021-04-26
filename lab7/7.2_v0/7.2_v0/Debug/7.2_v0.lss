@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm Mon Apr 26 20:51:53 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm Mon Apr 26 21:02:46 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
@@ -1588,31 +1588,31 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\ma
                                  
                                  
                                  .org 0 
-000000 940c 0004                 	jmp main ;skip vector table 
-                                 .org INT0addr
-000002 940c 0012                 	jmp int0_isr 
+000000 940c 0008                 	jmp main ;skip vector table 
+                                 .org PCINT0addr
+000006 940c 0016                 	jmp int0_isr
                                  ;------- main ---------- 
                                  main: 
-000004 ef0f                      	ldi r16, LOW(RAMEND) ;initialize stack for ISR 
-000005 bf0d                      	out spl, r16 
-000006 e008                      	ldi r16, HIGH(RAMEND) 
-000007 bf0e                      	out sph, r16 
+000008 ef0f                      	ldi r16, LOW(RAMEND) ;initialize stack for ISR 
+000009 bf0d                      	out spl, r16 
+00000a e008                      	ldi r16, HIGH(RAMEND) 
+00000b bf0e                      	out sph, r16 
                                  
-000008 9a25                      	sbi ddrb, 5 ;portb.5 is output (led0) 
-000009 9a2f                      	sbi portb, 7 ;pull-up enable for portd.2 
-00000a e041                      	ldi r20, (1<<int0) 
-00000b bb4d                      	out eimsk, r20 ;enable int0 
-00000c e042                      	ldi r20, (1<<isc01)|(0<<isc00)
-00000d 9340 0069                 	sts eicra, r20 ;set int0 active on falling edge 
-00000f 9478                      	sei ;enable interrupts 
+00000c 9a25                      	sbi ddrb, 5 ;portb.5 is output (led0) 
+00000d 9a2f                      	sbi portb, 7 ;pull-up enable for portd.2 
+00000e e041                      	ldi r20, (1<<int0) 
+00000f bb4d                      	out eimsk, r20 ;enable int0 
+000010 e042                      	ldi r20, (1<<isc01)|(0<<isc00)
+000011 9340 0069                 	sts eicra, r20 ;set int0 active on falling edge 
+000013 9478                      	sei ;enable interrupts 
                                  stop: 
-000010 940c 0010                 	jmp stop ;stay forever 
+000014 940c 0014                 	jmp stop ;stay forever 
                                  ;------- int0 ISR ------- 
                                  int0_isr: 
-000012 b153                      	in r21, pinb ;read portb
-000013 e260                      	ldi r22, 0x20 
-000014 2756                      	eor r21, r22 ;toggle bit 5 
-000015 b955                      	out portb,r21 
+000016 b153                      	in r21, pinb ;read portb
+000017 e260                      	ldi r22, 0x20 
+000018 2756                      	eor r21, r22 ;toggle bit 5 
+000019 b955                      	out portb,r21 
 
 
 RESOURCE USE INFORMATION
@@ -1662,7 +1662,7 @@ Instructions used: 9 out of 113 (8.0%)
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00002e     46      0     46   32768   0.1%
+[.cseg] 0x000000 0x000036     46      0     46   32768   0.1%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

@@ -11,7 +11,7 @@
 .org 0 
 	jmp main ;skip vector table 
 .org PCINT0addr
-	jmp pin_change_interrupt_0
+	jmp int0_isr
 ;------- main ---------- 
 main: 
 	ldi r16, LOW(RAMEND) ;initialize stack for ISR 
@@ -20,16 +20,16 @@ main:
 	out sph, r16 
 
 	sbi ddrb, 5 ;portb.5 is output (led0) 
-	sbi portd, 2 ;pull-up enable for portd.2 
-	ldi r20, (1<<int0) 
-	out eimsk, r20 ;enable int0 
-	ldi r20, (1<<isc01)|(0<<isc00)
-	sts eicra, r20 ;set int0 active on falling edge 
+	sbi portb, 7 ;pull-up enable for portd.2 
+	ldi r20, (1<<pcint7) 
+	sts pcmsk0, r20 ;enable int0 
+	ldi r20, (1<<pcie3)										;dobrze czy nie 3 ???
+	sts pcicr, r20
 	sei ;enable interrupts 
 stop: 
 	jmp stop ;stay forever 
 ;------- int0 ISR ------- 
-pin_change_interrupt_0: 
+int0_isr: 
 	in r21, pinb ;read portb
 	ldi r22, 0x20 
 	eor r21, r22 ;toggle bit 5 
