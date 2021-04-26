@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.2_v1\5.2_v1\main.asm Mon Apr 26 12:38:30 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.2_v1\5.2_v1\main.asm Mon Apr 26 12:54:04 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
                                  
@@ -1567,25 +1567,25 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000005 0f45                      add r20, r21
                                  ; Ustawione flagi: brak
                                  
-000006 eb4a                      ldi r20, -70
-000007 ea50                      ldi r21, -96
-000008 0f45                      add r20, r21
+000006 eb4a                      ldi r20, -70 ;binary: 0b 0100 0110; U2: 0b 1011 1010
+000007 ea50                      ldi r21, -96 ;binary: 0b 0110 0000; U2: 0b 1010 0000
+000008 0f45                      add r20, r21 ;binary: 0b 1010 0110; U2: 0b 0101 1010
                                  ; Ustawione flagi: S, C
                                  
 000009 e842                      ldi r20, -126
 00000a e15e                      ldi r21, 30
 00000b 0f45                      add r20, r21
-                                 ; Ustawione flagi:
+                                 ; Ustawione flagi: H, N
                                  
 00000c e74e                      ldi r20, 126
 00000d ef5a                      ldi r21, -6
 00000e 0f45                      add r20, r21
-                                 ; Ustawione flagi:
+                                 ; Ustawione flagi: C
                                  
 00000f ef4e                      ldi r20, -2
 000010 ef5b                      ldi r21, -5
 000011 0f45                      add r20, r21
-                                 ; Ustawione flagi:
+                                 ; Ustawione flagi: S, N
                                  
                                  
                                  
