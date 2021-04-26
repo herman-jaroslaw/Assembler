@@ -1,0 +1,40 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328PB"</DEVICE>
+ <WORKING_DIR>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\Debug\lab4_4.4_v4A.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>lab4_4.4_v4A.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>lab4_4.4_v4A.map</FILE>
+  <FILE>lab4_4.4_v4A.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <prog_start><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>19</LINE></prog_start>
+  <prime><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>15</LINE></prime>
+  <licznik><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>28</LINE></licznik>
+  <wyswietlanie><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>38</LINE></wyswietlanie>
+  <petla><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>40</LINE></petla>
+  <wait_sec><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>58</LINE></wait_sec>
+  <seg1><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>86</LINE></seg1>
+  <seg2><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>110</LINE></seg2>
+  <seg3><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>136</LINE></seg3>
+  <seg4><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>161</LINE></seg4>
+  <opoznienie_1><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>65</LINE></opoznienie_1>
+  <opoznienie_2><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>67</LINE></opoznienie_2>
+  <opoznienie_3><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>69</LINE></opoznienie_3>
+  <stop><FILE>C:\Users\Jaro\Documents\Atmel Studio\7.0\projekty_lab4\projekty_lab4_gotowe\lab4_4.4_v4A\lab4_4.4_v4A\main.asm</FILE><LINE>185</LINE></stop>
+ </LABELS>
+</ASSEMBLER_INFO>

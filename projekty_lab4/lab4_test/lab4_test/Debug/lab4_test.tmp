@@ -1,0 +1,27 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328PB"</DEVICE>
+ <WORKING_DIR>c:\users\jaro\Documents\Atmel Studio\7.0\lab4_test\lab4_test\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>c:\users\jaro\Documents\Atmel Studio\7.0\lab4_test\lab4_test\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>c:\users\jaro\Documents\Atmel Studio\7.0\lab4_test\lab4_test\Debug\lab4_test.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>lab4_test.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>lab4_test.map</FILE>
+  <FILE>lab4_test.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <stop><FILE>c:\users\jaro\Documents\Atmel Studio\7.0\lab4_test\lab4_test\main.asm</FILE><LINE>10</LINE></stop>
+ </LABELS>
+</ASSEMBLER_INFO>
