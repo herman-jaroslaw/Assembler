@@ -4,7 +4,7 @@
 .cseg 
 .org 0 
 		jmp start
-.org INT1addr
+.org INT0addr
 		rjmp keypad_ISR ;Keypad External Interrupt Request
 ;----------------------------------------------------------------------------------- 
 ;Initialization
@@ -30,7 +30,7 @@ start:
 		out portc, r20
 
 		;Select rows as interrupt triggers 
-		ldi r20, (1<<pcint8)|(1<<pcint9)						;8 i 9 dobre ???
+		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
 		sts pcmsk1, r20
 
 		;Enable pcint1 
@@ -70,7 +70,7 @@ keypad_ISR:
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, ????? 
+		ldi r20, 0x0f													; j. w.
 		out portc, r20
 
 		;Read Port C. Rows code in high nibble 
