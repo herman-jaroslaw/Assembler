@@ -1,12 +1,11 @@
-;
-; lab7_zad71.asm
+;7.2_v0
 ;
 ; Created: 2021-04-26 19:47:08
 ; Author : DELL
 ;
 
 
-#include "m328pbdef.inc" 
+#include "m328pbdef.inc"			;czemu hash?
 
 .org 0 
 	jmp main ;skip vector table 
