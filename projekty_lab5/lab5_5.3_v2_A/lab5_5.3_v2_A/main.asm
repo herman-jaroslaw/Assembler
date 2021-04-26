@@ -23,13 +23,13 @@ prog_start:
 	out ddrb, r16  ;diody						;DIODY - port B
 
 	///21370
-	ldi r16, 0	;M£ODSZE									
+	ldi r16, 0			;M£ODSZE									
 	ldi r17, high(15)	;STARSZE	;high(15) bierze pierwsze 4 bity liczby 15 (0b00001111), czyli 0							
 	
 	///14959
-	subi r16, 0	 ;M£ODSZE	
+	subi r16, 0			;M£ODSZE	
 	sbci r17, low(38)	;STARSZE	;low(38) bierze drugie 4 bity liczby 38 (0b00100110), czyli 6
-    brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010
+    brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010 -> DEC 250, w watch R17 = 218
 	brpl znak						;wyœwietlacz wyœwietli³ wartoœæ 00AD, czyli 173
 znak:													;dioda znaku
 	brvs obie

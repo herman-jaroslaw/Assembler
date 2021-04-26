@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Mon Apr 26 18:38:18 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\lab5_5.3_v2_A\lab5_5.3_v2_A\main.asm Mon Apr 26 18:44:08 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1578,14 +1578,14 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003d b904                      	out ddrb, r16  ;diody						;DIODY - port B
                                  
                                  	///21370
-00003e e000                      	ldi r16, 0//mlodsze									
-00003f e010                      	ldi r17, high(15)	//starsze	;high(15) bierze pierwsze 4 bity liczby 15 (0b00001111), czyli 0							
+00003e e000                      	ldi r16, 0			;M£ODSZE									
+00003f e010                      	ldi r17, high(15)	;STARSZE	;high(15) bierze pierwsze 4 bity liczby 15 (0b00001111), czyli 0							
                                  	
                                  	///14959
-000040 5000                      	subi r16, 0					
-000041 4216                      	sbci r17, low(38)				;low(38) bierze drugie 4 bity liczby 38 (0b00100110), czyli 6
-000042 f02b                          brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010
-000043 f402                      	brpl znak
+000040 5000                      	subi r16, 0			;M£ODSZE	
+000041 4216                      	sbci r17, low(38)	;STARSZE	;low(38) bierze drugie 4 bity liczby 38 (0b00100110), czyli 6
+000042 f02b                          brvs przepelnienie				;czyli wynik to -6 -> 0b00000110 -> U2: 0b11111010 -> DEC 250, w watch R17=
+000043 f402                      	brpl znak						;wyœwietlacz wyœwietli³ wartoœæ 00AD, czyli 173
                                  znak:													;dioda znaku
 000044 f03b                      	brvs obie
 000045 e260                              ldi r22, 0b100000
