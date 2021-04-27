@@ -13,7 +13,7 @@
 
 	rjmp prog_start     
     .org 0x32  
-	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47, 0x47 	   ;lista
+	prime: .DB 0x7E, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7f, 0x7b, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47
  .DSEG 
 .ORG 0x100 
 	var1: .BYTE 1  
@@ -25,16 +25,16 @@ prog_start:
 	ldi r16, $ff    
 	out ddre, r16    
 	out ddrd, r16
-	out ddrb, r16		;tu: c - ledy
+	out ddrb, r16
 
 	;-318
-	ldi r16, 0xC2 ;mlodsze
-	ldi r17, 0xFE	;starsze
+	ldi r16, 0xC2 ;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110									
+	ldi r17, 0xFE	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010
 	
 	;271
-	subi r16,0x0F
-	sbci r17,0x01		;-318 - 271 = -589
-    brvs przepelnienie
+	subi r16,0x0F	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX 
+	sbci r17,0x01		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111
+    brvs przepelnienie	; 254 - 1 = 253 = HEX B3
 	brpl znak
 znak:
 		ldi r31,0
