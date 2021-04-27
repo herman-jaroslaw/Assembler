@@ -23,16 +23,16 @@
 
 prog_start: 
 	ldi r16, $ff    
-	out ddrb, r16    
-	out ddrd, r16
-	out ddrc, r16 
+	out ddre, r16   ;b - control
+	out ddrd, r16	;d - display
+	out ddrb, r16	;c - diody
 
-	ldi r16, high(-1200) //starsze
-	ldi r17, low(-1200)	//mlodsze
+	ldi r16, 														; 1. high(-1200) //starsze
+	ldi r17, low(-1200)	//mlodsze									; 2. high(-100) -> wyœwietla 5700
 	
 	subi r17, 0x20
 	sbci r16, 0x00
-	brmi znak
+	brmi znak														; Ad 1 WYŒWIETLA WARTOŒÆ 5b20
 diody:
     brvs przepelnienie
 	jmp dzielenie
@@ -52,7 +52,7 @@ przepelnienie:
         out pinc, r23 
 dzielenie:
 
-		;(F-32) * (1/2 + 1/16)
+		;(F-32) * (1/2 + 1/16)		;to nieco wiêcej ni¿ (F-32) * (5/9)
 		;dzielenie przez 1/2
 	asr r16			
 	ror r17												
@@ -150,7 +150,7 @@ seg1:
 
 	lds r16, var1 ;wyswietlacz
 	com r16                     
-	out portb, r16  
+	out porte, r16  
 
 	ldi r16, 0 ;segment 
 	lds r18, var2 
