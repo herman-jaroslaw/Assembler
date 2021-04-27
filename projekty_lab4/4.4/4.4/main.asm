@@ -1,4 +1,9 @@
 ;4.4
+;port b - LED
+;port c - switch
+;port d - 7hex display
+;port e - 7hex control
+
 .org 0x00 
 rjmp ustawianie
 .org 0x32
@@ -13,7 +18,7 @@ ustawianie:
 
 	ldi r16, $ff			;ustawianie portów
 	out ddrd, r16
-	out ddrb, r16
+	out ddre, r16
 
 reset:
 	ldi r20, 0x00			; ustawianie licznika
@@ -71,7 +76,7 @@ seg1:
 
 	ldi r20, 0x01
 	com r20
-	out portb, r20
+	out porte, r20
 
 	swap r21
 	andi r21, 0x0f
@@ -92,7 +97,7 @@ seg2:
 
 	ldi r20, 0x02
 	com r20
-	out portb, r20
+	out porte, r20
 
 
 	andi r21, 0x0f
@@ -113,7 +118,7 @@ seg3:
 
 	ldi r21, 0x04
 	com r21
-	out portb, r21
+	out porte, r21
 
 
 	swap r20
@@ -135,7 +140,7 @@ seg4:
 
 	ldi r21, 0x08
 	com r21
-	out portb, r21
+	out porte, r21
 
 
 	andi r20, 0x0f
