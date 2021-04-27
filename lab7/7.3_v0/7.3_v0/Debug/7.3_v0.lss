@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Mon Apr 26 22:52:53 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Tue Apr 27 18:49:01 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
@@ -1582,88 +1582,105 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  
                                  .cseg 
                                  .org 0 
-000000 940c 0003                 		jmp start
-                                 .org INT0addr
-000002 c015                      		rjmp keypad_ISR ;Keypad External Interrupt Request
+000000 940c 0009                 		jmp start
+                                 .org PCINT1addr																	; ???
+000008 c015                      		rjmp keypad_ISR ;Keypad External Interrupt Request
+                                 		;.def button_code=r20													; ???
                                  ;----------------------------------------------------------------------------------- 
                                  ;Initialization
                                  start:
                                  		; Set Stack Pointer to top of RAM
-000003 e008                      		ldi r16, high(ramend) 
-000004 bf0e                      		out SPH, r16 
-000005 ef0f                      		ldi r16, low(ramend) 
-000006 bf0d                      		out SPL, r16
+000009 e008                      		ldi r16, high(ramend) 
+00000a bf0e                      		out SPH, r16 
+00000b ef0f                      		ldi r16, low(ramend) 
+00000c bf0d                      		out SPL, r16
                                  
                                  		;SET UP 6 LEDS 
                                  		;Set up port B as output for LED controls 
-000007 e30f                      		ldi r16, 0x3F 
-000008 b904                      		out ddrb, r16 
+00000d ef0f                      		ldi r16, 0xFF 
+00000e b904                      		out ddrb, r16 
+                                 
+                                 		; Clear intf2 flag
+                                 		;
+                                 		;
+                                 
+                                 		; Enable Int2
+                                 		;
+                                 		;
+                                 
+                                 		; Set Int2 active on falling edge
+                                 		;
+                                 		;
                                  
                                  		;SET UP KEYPAD, 2 rows x 4 cols 
                                  		;Set rows as inputs and columns as outputs 
-000009 e04f                      		ldi r20, 0x0f 
-00000a b947                      		out ddrc, r20
+00000f e04f                      		ldi r20, 0x0f 
+000010 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-00000b e340                      		ldi r20, 0x30 
-00000c b948                      		out portc, r20
+000011 e340                      		ldi r20, 0x30 
+000012 b948                      		out portc, r20
                                  
                                  		;Select rows as interrupt triggers 
-00000d e340                      		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
-00000e 9340 006c                 		sts pcmsk1, r20
-                                 
-                                 		;Enable pcint1 
-000010 e042                      		ldi r20, (1<<pcie1) 
-000011 9340 0068                 		sts pcicr, r20
-                                 
-                                 		;Reset register for output 
-000013 e020                      		ldi r18, 0x00
+000013 e340                      		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
+000014 9340 006c                 		sts pcmsk1, r20
                                  
                                  		;Global Enable Interrupt
-000014 9478                      		Sei
+                                 		;
+                                 
+                                 
+                                 		;Enable pcint1 
+000016 e042                      		ldi r20, (1<<pcie1) 
+000017 9340 0068                 		sts pcicr, r20
+                                 
+                                 		;Reset register for output 
+000019 e020                      		ldi r18, 0x00
+                                 
+                                 		;Global Enable Interrupt
+00001a 9478                      		Sei
                                  ;----------------------------------------------------------------------------------- 
                                  ;Set up infinite loop 
                                  loop:
-000015 940e 0027                 		call led_display 
-000017 cffd                      		rjmp loop
+00001b 940e 002d                 		call led_display 
+00001d cffd                      		rjmp loop
                                  ;----------------------------------------------------------------------------------- 
                                  ;Keypad Interrupt Service Routine 
                                  keypad_ISR:
                                  		;Set rows as outputs and columns as inputs 
-000018 ef40                      		ldi r20, 0xf0													;0xf0 da³em tak jak u KB -> ???
-000019 b947                      		out ddrc, r20
+00001e ef40                      		ldi r20, 0xf0													;0xf0 da³em tak jak u KB -> ???
+00001f b947                      		out ddrc, r20
                                  
                                  		;Set columns to high (pull ups) and rows to low 
-00001a e04f                      		ldi r20, 0x0f													; j. w. 
-00001b b948                      		out portc, r20
+000020 e04f                      		ldi r20, 0x0f													; j. w. 
+000021 b948                      		out portc, r20
                                  
                                  		;Read Port C. Columns code in low nibble 
-00001c b106                      		in r16, pinc
+000022 b106                      		in r16, pinc
                                  
                                  		;Store columns code to r18 on low nibble 
-00001d 2f20                      		mov r18, r16 
-00001e 702f                      		andi r18, 0x0f
+000023 2f20                      		mov r18, r16 
+000024 702f                      		andi r18, 0x0f
                                  
                                  		;Set rows as inputs and columns as outputs 
-00001f e04f                      		ldi r20, 0x0f													; j. w. 
-000020 b947                      		out ddrc, r20
+000025 e04f                      		ldi r20, 0x0f													; j. w. 
+000026 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-000021 e04f                      		ldi r20, 0x0f													; j. w.
-000022 b948                      		out portc, r20
+000027 e04f                      		ldi r20, 0x0f													; j. w.
+000028 b948                      		out portc, r20
                                  
                                  		;Read Port C. Rows code in high nibble 
-000023 b106                      		in r16, pinc
+000029 b106                      		in r16, pinc
                                  
                                  		;Merge with previous read 
-000024 7300                      		andi r16, 0x30 
-000025 0f20                      		add r18, r16
+00002a 7300                      		andi r16, 0x30 
+00002b 0f20                      		add r18, r16
                                  
-000026 9518                      		reti 
+00002c 9518                      		reti 
                                  ;----------------------------------------------------------------------------------- 
                                  ;display value from r18 on leds 
                                  led_display: 
-000027 b925                      	out portb,r18 
+00002d b925                      	out portb,r18 
 
 
 RESOURCE USE INFORMATION
@@ -1713,7 +1730,7 @@ Instructions used: 13 out of 113 (11.5%)
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000052     82      0     82   32768   0.3%
+[.cseg] 0x000000 0x00005e     82      0     82   32768   0.3%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

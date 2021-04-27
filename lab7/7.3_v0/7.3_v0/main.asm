@@ -4,8 +4,9 @@
 .cseg 
 .org 0 
 		jmp start
-.org INT0addr
+.org PCINT1addr																	; ???
 		rjmp keypad_ISR ;Keypad External Interrupt Request
+		;.def button_code=r20													; ???
 ;----------------------------------------------------------------------------------- 
 ;Initialization
 start:
@@ -17,8 +18,20 @@ start:
 
 		;SET UP 6 LEDS 
 		;Set up port B as output for LED controls 
-		ldi r16, 0x3F 
+		ldi r16, 0xFF 
 		out ddrb, r16 
+
+		; Clear intf2 flag
+		;
+		;
+
+		; Enable Int2
+		;
+		;
+
+		; Set Int2 active on falling edge
+		;
+		;
 
 		;SET UP KEYPAD, 2 rows x 4 cols 
 		;Set rows as inputs and columns as outputs 
@@ -32,6 +45,10 @@ start:
 		;Select rows as interrupt triggers 
 		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
 		sts pcmsk1, r20
+
+		;Global Enable Interrupt
+		;
+
 
 		;Enable pcint1 
 		ldi r20, (1<<pcie1) 

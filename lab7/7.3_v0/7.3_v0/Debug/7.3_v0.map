@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Mon Apr 26 22:52:53 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Tue Apr 27 18:49:01 2021
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1146,7 +1146,7 @@ EQU  TIMER4_COMPAaddr 00000054
 EQU  TIMER4_COMPBaddr 00000056
 EQU  TIMER4_OVFaddr 00000058
 EQU  INT_VECTORS_SIZE 0000005a
-CSEG start        00000003
-CSEG keypad_ISR   00000018
-CSEG loop         00000015
-CSEG led_display  00000027
+CSEG start        00000009
+CSEG keypad_ISR   0000001e
+CSEG loop         0000001b
+CSEG led_display  0000002d

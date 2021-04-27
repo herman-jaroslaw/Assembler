@@ -23,9 +23,9 @@
   <FILE>7.3_v0.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>11</LINE></start>
-  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>52</LINE></keypad_ISR>
-  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>47</LINE></loop>
-  <led_display><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>86</LINE></led_display>
+  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>12</LINE></start>
+  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>69</LINE></keypad_ISR>
+  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>64</LINE></loop>
+  <led_display><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>103</LINE></led_display>
  </LABELS>
 </ASSEMBLER_INFO>
