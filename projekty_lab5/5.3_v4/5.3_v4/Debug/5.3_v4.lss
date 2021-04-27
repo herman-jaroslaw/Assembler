@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\main.asm Tue Apr 27 15:57:26 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\main.asm Tue Apr 27 16:23:07 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1580,17 +1580,17 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003a ef0f                      	ldi r16, $ff    
 00003b b90d                      	out ddre, r16    
 00003c b90a                      	out ddrd, r16
-00003d b904                      	out ddrb, r16		;tu: c - ledy
+00003d b904                      	out ddrb, r16
                                  
                                  	;-318
-00003e ec02                      	ldi r16, 0xC2 ;mlodsze
-00003f ef1e                      	ldi r17, 0xFE	;starsze
+00003e ec02                      	ldi r16, 0xC2 ;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110									
+00003f ef1e                      	ldi r17, 0xFE	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010
                                  	
                                  	;271
-000040 500f                      	subi r16,0x0F
-000041 4011                      	sbci r17,0x01		;-318 - 271 = -589
-000042 f05b                          brvs przepelnienie
-000043 f402                      	brpl znak
+000040 500f                      	subi r16,0x0F	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX 
+000041 4011                      	sbci r17,0x01		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111
+000042 f05b                          brvs przepelnienie	; 254 - 1 = 253 = HEX B3
+000043 f402                      	brpl znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304
                                  znak:
 000044 e0f0                      		ldi r31,0
 000045 e0e1                      		ldi r30,1

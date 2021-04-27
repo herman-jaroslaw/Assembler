@@ -35,7 +35,7 @@ prog_start:
 	subi r16,0x0F	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX 
 	sbci r17,0x01		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111
     brvs przepelnienie	; 254 - 1 = 253 = HEX B3
-	brpl znak
+	brpl znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304
 znak:
 		ldi r31,0
 		ldi r30,1
