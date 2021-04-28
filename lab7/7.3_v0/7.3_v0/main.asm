@@ -1,4 +1,4 @@
-;7.3_v0
+;7.3_v0 <- dzia³a
 
 .include"m328pbdef.inc"
 .cseg 
@@ -68,11 +68,11 @@ loop:
 ;Keypad Interrupt Service Routine 
 keypad_ISR:
 		;Set rows as outputs and columns as inputs 
-		ldi r20, 0b00001111													;0xf0 da³em tak jak u KB -> ???
+		ldi r20, 0b00110000													;0xf0 da³em tak jak u KB -> ???
 		out ddrc, r20
 
 		;Set columns to high (pull ups) and rows to low 
-		ldi r20, 0b00000001											; j. w. 
+		ldi r20, 0b00110000											; j. w. 
 		out portc, r20
 
 		;Read Port C. Columns code in low nibble 
@@ -83,11 +83,11 @@ keypad_ISR:
 		andi r18, 0x0f
 
 		;Set rows as inputs and columns as outputs 
-		ldi r20, 0b00010000												; j. w. 
+		ldi r20, 0b00001111												; j. w. 
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, 0b00010000													; j. w.
+		ldi r20, 0b00001111													; j. w.
 		out portc, r20
 
 		;Read Port C. Rows code in high nibble 
