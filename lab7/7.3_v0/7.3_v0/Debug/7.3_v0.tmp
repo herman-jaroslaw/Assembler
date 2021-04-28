@@ -7,10 +7,9 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc</FILE>
-  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc</FILE>
  </INCLUDED_FILES>
  <OBJECT_FILES>
   <FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\Debug\7.3_v0.obj</FILE>
@@ -23,9 +22,9 @@
   <FILE>7.3_v0.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>12</LINE></start>
-  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>69</LINE></keypad_ISR>
-  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>64</LINE></loop>
-  <led_display><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm</FILE><LINE>103</LINE></led_display>
+  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm</FILE><LINE>11</LINE></start>
+  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm</FILE><LINE>50</LINE></keypad_ISR>
+  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm</FILE><LINE>45</LINE></loop>
+  <led_display><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm</FILE><LINE>84</LINE></led_display>
  </LABELS>
 </ASSEMBLER_INFO>

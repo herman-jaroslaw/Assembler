@@ -1,12 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Wed Apr 28 12:49:48 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\7.3_v0_PM.asm Wed Apr 28 18:12:19 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
-C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
-C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
                                  
-                                 ;7.3_v0
+                                 ;7.3_v0_PM
                                  
                                  
                                  ;*************************************************************************
@@ -1550,40 +1548,10 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  
                                  
                                  
-                                 .include"m328pbdef.inc"
-                                 
-                                 
-                                 ;*************************************************************************
-                                 ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
-                                 ;*
-                                 ;* Number            : AVR000
-                                 ;* File Name         : m328PBdef.inc
-                                 ;* Title             : Register/Bit Definitions for the ATmega328PB
-                                 ;* Created           : 2020-10-30 11:10
-                                 ;* Version           : 1.00
-                                 ;* Support e-mail    : avr@atmel.com
-                                 ;* Target MCU        : ATmega328PB
-                                 ;*
-                                 ;* DESCRIPTION
-                                 ;* When including this file in the assembly program file, all I/O register
-                                 ;* names and I/O register bit names appearing in the data book can be used.
-                                 ;* In addition, the six registers forming the three data pointers X, Y and
-                                 ;* Z have been assigned names XL - ZH. Highest RAM address for Internal
-                                 ;* SRAM is also defined
-                                 ;*
-                                 ;*************************************************************************
-                                 
-                                 #ifndef _M328PBDEF_INC_
-                                 #endif /* _M328PBDEF_INC_ */
-                                 
-                                 ; ***** END OF FILE ******************************************************
-                                 
-                                 
-                                 
                                  .cseg 
                                  .org 0 
 000000 940c 0009                 		jmp start
-                                 .org PCINT1addr																	; ???
+                                 .org PCINT1addr													; ???
 000008 c015                      		rjmp keypad_ISR ;Keypad External Interrupt Request
                                  		;.def button_code=r20													; ???
                                  ;----------------------------------------------------------------------------------- 
@@ -1599,34 +1567,17 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  		;Set up port B as output for LED controls 
 00000d ef0f                      		ldi r16, 0xFF 
 00000e b904                      		out ddrb, r16 
-                                 
-                                 		; Clear intf2 flag
-                                 		;
-                                 		;
-                                 
-                                 		; Enable Int2
-                                 		;
-                                 		;
-                                 
-                                 		; Set Int2 active on falling edge
-                                 		;
-                                 		;
-                                 
-                                 		;SET UP KEYPAD, 2 rows x 4 cols 
-                                 		;Set rows as inputs and columns as outputs 
 00000f e04f                      		ldi r20, 0x0f 
 000010 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-000011 ef40                      		ldi r20, 0xf0														;previous value: 0x30 ; ???
+000011 e340                      		ldi r20, 0x30 
 000012 b948                      		out portc, r20
                                  
                                  		;Select rows as interrupt triggers 
 000013 e340                      		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
 000014 9340 006c                 		sts pcmsk1, r20
                                  
-                                 		;Global Enable Interrupt
-                                 		;
                                  
                                  
                                  		;Enable pcint1 
@@ -1635,7 +1586,6 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  
                                  		;Reset register for output 
 000019 e020                      		ldi r18, 0x00
-                                 
                                  		;Global Enable Interrupt
 00001a 9478                      		Sei
                                  ;----------------------------------------------------------------------------------- 
@@ -1647,11 +1597,11 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  ;Keypad Interrupt Service Routine 
                                  keypad_ISR:
                                  		;Set rows as outputs and columns as inputs 
-00001e e04f                      		ldi r20, 0b00001111													;0xf0 da³em tak jak u KB -> ???
+00001e e340                      		ldi r20, 0x30	//???????????												
 00001f b947                      		out ddrc, r20
                                  
                                  		;Set columns to high (pull ups) and rows to low 
-000020 e041                      		ldi r20, 0b00000001											; j. w. 
+000020 e340                      		ldi r20, 0x30	///???????????????????								; j. w. 
 000021 b948                      		out portc, r20
                                  
                                  		;Read Port C. Columns code in low nibble 
@@ -1662,11 +1612,11 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
 000024 702f                      		andi r18, 0x0f
                                  
                                  		;Set rows as inputs and columns as outputs 
-000025 e140                      		ldi r20, 0b00010000												; j. w. 
+000025 e04f                      		ldi r20, 0x0f	//???????????????										; j. w. 
 000026 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-000027 e140                      		ldi r20, 0b00010000													; j. w.
+000027 e04f                      		ldi r20, 0x0f	//???????????										; j. w.
 000028 b948                      		out portc, r20
                                  
                                  		;Read Port C. Rows code in high nibble 
