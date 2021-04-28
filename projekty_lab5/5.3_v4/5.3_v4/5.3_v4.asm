@@ -28,7 +28,7 @@ prog_start:
 	out ddrb, r16
 
 	;-318
-	ldi r16, 0xC2 ;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110									
+	ldi r16, 0xC2	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110									
 	ldi r17, 0xFE	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010
 	
 	;271
