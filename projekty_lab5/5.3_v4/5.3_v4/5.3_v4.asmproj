@@ -15,7 +15,7 @@
     <Name>5.3_v4</Name>
     <RootNamespace>5.3_v4</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
-    <EntryFile>$(MSBuildProjectDirectory)\5.3_v4.asm</EntryFile>
+    <EntryFile>$(MSBuildProjectDirectory)\5.3_v5_PM.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
@@ -82,6 +82,10 @@
   <ItemGroup>
     <Compile Include="5.3_v4.asm">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="5.3_v5_PM.asm">
+      <SubType>Code</SubType>
+      <Link>5.3_v5_PM.asm</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Assembler.targets" />

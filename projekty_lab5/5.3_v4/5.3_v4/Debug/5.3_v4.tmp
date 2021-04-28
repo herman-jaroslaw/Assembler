@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc</FILE>
  </INCLUDED_FILES>
@@ -22,23 +22,23 @@
   <FILE>5.3_v4.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <prog_start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>24</LINE></prog_start>
-  <prime><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>16</LINE></prime>
-  <var1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>19</LINE></var1>
-  <var2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>20</LINE></var2>
-  <var3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>21</LINE></var3>
-  <przepelnienie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>50</LINE></przepelnienie>
-  <znak><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>39</LINE></znak>
-  <obie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>55</LINE></obie>
-  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>59</LINE></start>
-  <wyswietlanie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>62</LINE></wyswietlanie>
-  <petla><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>64</LINE></petla>
-  <wait_sec><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>103</LINE></wait_sec>
-  <seg1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>130</LINE></seg1>
-  <opoznienie_1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>110</LINE></opoznienie_1>
-  <opoznienie_2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>112</LINE></opoznienie_2>
-  <opoznienie_3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>114</LINE></opoznienie_3>
-  <noswap><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>148</LINE></noswap>
-  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm</FILE><LINE>161</LINE></stop>
+  <prog_start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>24</LINE></prog_start>
+  <prime><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>16</LINE></prime>
+  <var1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>19</LINE></var1>
+  <var2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>20</LINE></var2>
+  <var3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>21</LINE></var3>
+  <znak><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>41</LINE></znak>
+  <prz><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>38</LINE></prz>
+  <przepelnienie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>45</LINE></przepelnienie>
+  <licznik><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>50</LINE></licznik>
+  <wyswietlanie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>53</LINE></wyswietlanie>
+  <petla><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>56</LINE></petla>
+  <wait_sec><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>95</LINE></wait_sec>
+  <seg1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>122</LINE></seg1>
+  <opoznienie_1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>102</LINE></opoznienie_1>
+  <opoznienie_2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>104</LINE></opoznienie_2>
+  <opoznienie_3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>106</LINE></opoznienie_3>
+  <bezzamiany><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>140</LINE></bezzamiany>
+  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm</FILE><LINE>153</LINE></stop>
  </LABELS>
 </ASSEMBLER_INFO>

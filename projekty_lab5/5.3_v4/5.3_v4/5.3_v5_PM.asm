@@ -1,4 +1,4 @@
-;5.3
+;5.3_v5_PM
 ;port b - LED
 ;port c - switch
 ;port d - 7hex display
@@ -25,73 +25,64 @@ prog_start:
 	ldi r16, $ff    
 	out ddre, r16    
 	out ddrd, r16
-	out ddrb, r16
+	out ddrb, r16 
 
-	;-318
-	ldi r16, 0xC2	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2									
-	ldi r17, 0xFE	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+	///21370
+	ldi r16, 0x00 //0xC2 //starsze
+	ldi r17, 0x05//0xFE	//mlodsze
 	
-	;271
-	subi r16,0x0F	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
-	sbci r17,0x01		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
-    brvs przepelnienie	; 254 - 1 = 253 = HEX FD
-	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
-	rjmp start
+	///14959
+	subi r16,0x00
+	sbci r17,0x02
+	brmi znak
+prz:
+    brvs przepelnienie
+	jmp licznik
 znak:
-		ldi r31,0
-		ldi r30,1
-		com r16
-		com r17
-		add r16, r30
-		adc r17, r31	
-	brvs obie
-        ldi r22, 0b100000
-        out portb, r22
-		rjmp start
+        ldi r22, 0b0011  // jak minus to œwiec¹ siê dwa pierwsze LED-y  >>>
+        out pinb, r22
+		jmp prz																//(jak oba na tak to œwiec¹ wszystkie 4 LED-y)
 przepelnienie:
-	brmi obie
-        ldi r23, 0b000100
-        out portb, r23
-		rjmp start
-obie:
-       ldi r23, 0b100100
-        out portb, r23
-	
-start:
-	call wyswietlanie 
+        ldi r23, 0b1100 // jak przepe³nienie to œwieci siê 3 i 4 LED    >>>
+        out pinb, r23 
+
+	//////////////////////////licznik 
+licznik: 
+	call wyswietlanie
 	rjmp prog_start 
 wyswietlanie: 
 	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+
 	petla: 
 		call wait_sec 
 		dec r18 
 	brne petla 
-								 ;wysw1 
-		ldi r19,0x08 
+	//////////////////////seg1 
+		ldi r19,0x01 
 		ldi r20,1 
 		sts var1, r19 
 		sts var2, r20 
 		sts var3, r16
 		call seg1  
 			call wait_sec 
-								 ;wysw2
-		ldi r19,0x04 
+///////////////////////seg2 
+		ldi r19,0x02 
 		ldi r20,0
 		sts var1, r19 
 		sts var2, r20 
 		sts var3, r16
 		call seg1 
 			call wait_sec 
-								;wysw3 
-		ldi r19,0x02 
+		////////////////////////////seg3 
+		ldi r19,0x04 
 		ldi r20,1
 		sts var1, r19 
 		sts var2, r20 
 		sts var3, r17
 		call seg1 
 			call wait_sec 
-								;wysw4 
-		ldi r19,0x01 
+			////////////////////////seg4 
+		ldi r19,0x08 
 		ldi r20,0 
 		sts var1, r19 
 		sts var2, r20	
@@ -100,7 +91,7 @@ wyswietlanie:
 			call wait_sec 
 	ret 
 
-	;delay
+	///////////////////////////////////opóŸnienie 
 wait_sec:   
 	push r16   
 	push r17   
@@ -127,7 +118,7 @@ pop r17
 pop r16   
 
 Ret  
-		;podprogram wyswietlacze
+/////////////////////////////////////////////////////////////////////////////////////   
 seg1:							   
 	push r16 
 	push r17 
@@ -136,17 +127,17 @@ seg1:
 	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
 	ldi zh, high(2*prime)    
 
-	lds r16, var1	;wyswietlacz
+	lds r16, var1 //////wybieranie wyœwietlacza 
 	com r16                     
 	out porte, r16  
 
-	ldi r16, 0	;segment
+	ldi r16, 0 /////////////wybieramy segmenty  
 	lds r18, var2 
 	cp r18, r16 
 	lds r17, var3
-	brne noswap 
+	brne bezzamiany 
 	swap r17  
-noswap: 
+bezzamiany: 
 	andi r17, 0x0f  
 	add zl, r17  
 	adc zh, r16 
@@ -160,6 +151,3 @@ noswap:
 
 	ret  
 stop: rjmp stop
-
-;r16 fc
-;r17 ff

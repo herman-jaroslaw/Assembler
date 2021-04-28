@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm Wed Apr 28 21:37:28 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v5_PM.asm Wed Apr 28 23:00:20 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
                                  
-                                 ;5.3
+                                 ;5.3_v5_PM
                                  
                                  
                                  ;*************************************************************************
@@ -1580,139 +1580,131 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003a ef0f                      	ldi r16, $ff    
 00003b b90d                      	out ddre, r16    
 00003c b90a                      	out ddrd, r16
-00003d b904                      	out ddrb, r16
+00003d b904                      	out ddrb, r16 
                                  
-                                 	;-318
-00003e e007                      	ldi r16, 0x07	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2									
-00003f e015                      	ldi r17, 0x05	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+                                 	///21370
+00003e e000                      	ldi r16, 0x00 //0xC2 //starsze
+00003f e015                      	ldi r17, 0x05//0xFE	//mlodsze
                                  	
-                                 	;271
-000040 5006                      	subi r16,0x06	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
-000041 4015                      	sbci r17,0x05		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
-000042 f05b                          brvs przepelnienie	; 254 - 1 = 253 = HEX FD
-000043 f402                      	brpl znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947
+                                 	///14959
+000040 5000                      	subi r16,0x00
+000041 4012                      	sbci r17,0x02
+000042 f01a                      	brmi znak
+                                 prz:
+000043 f033                          brvs przepelnienie
+000044 940c 004c                 	jmp licznik
                                  znak:
-000044 e0f0                      		ldi r31,0
-000045 e0e1                      		ldi r30,1
-000046 9500                      		com r16
-000047 9510                      		com r17
-000048 0f0e                      		add r16, r30
-000049 1f1f                      		adc r17, r31	
-00004a f03b                      	brvs obie
-00004b e260                              ldi r22, 0b100000
-00004c b965                              out portb, r22
-00004d c006                      		rjmp start
+000046 e063                              ldi r22, 0b0011  // jak minus to œwiec¹ siê dwa pierwsze LED-y  >>>
+000047 b963                              out pinb, r22
+000048 940c 0043                 		jmp prz																//(jak oba na tak to œwiec¹ wszystkie 4 LED-y)
                                  przepelnienie:
-00004e f41a                      	brpl obie
-00004f e074                              ldi r23, 0b000100
-000050 b975                              out portb, r23
-000051 c002                      		rjmp start
-                                 obie:
-000052 e274                             ldi r23, 0b100100
-000053 b975                              out portb, r23
-                                 	
-                                 start:
-000054 940e 0057                 	call wyswietlanie 
-000056 cfe3                      	rjmp prog_start 
+00004a e07c                              ldi r23, 0b1100 // jak przepe³nienie to œwieci siê 3 i 4 LED    >>>
+00004b b973                              out pinb, r23 
+                                 
+                                 	//////////////////////////licznik 
+                                 licznik: 
+00004c 940e 004f                 	call wyswietlanie
+00004e cfeb                      	rjmp prog_start 
                                  wyswietlanie: 
-000057 e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+00004f e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+                                 
                                  	petla: 
-000058 940e 008d                 		call wait_sec 
-00005a 952a                      		dec r18 
-00005b f7e1                      	brne petla 
-                                 								 ;wysw1 
-00005c e031                      		ldi r19,0x01 
-00005d e041                      		ldi r20,1 
-00005e 9330 0100                 		sts var1, r19 
-000060 9340 0101                 		sts var2, r20 
-000062 9300 0102                 		sts var3, r16
-000064 940e 00a2                 		call seg1  
-000066 940e 008d                 			call wait_sec 
-                                 								 ;wysw2
-000068 e032                      		ldi r19,0x02 
-000069 e040                      		ldi r20,0
-00006a 9330 0100                 		sts var1, r19 
-00006c 9340 0101                 		sts var2, r20 
-00006e 9300 0102                 		sts var3, r16
-000070 940e 00a2                 		call seg1 
-000072 940e 008d                 			call wait_sec 
-                                 								;wysw3 
-000074 e034                      		ldi r19,0x04 
-000075 e041                      		ldi r20,1
-000076 9330 0100                 		sts var1, r19 
-000078 9340 0101                 		sts var2, r20 
-00007a 9310 0102                 		sts var3, r17
-00007c 940e 00a2                 		call seg1 
-00007e 940e 008d                 			call wait_sec 
-                                 								;wysw4 
-000080 e038                      		ldi r19,0x08 
-000081 e040                      		ldi r20,0 
-000082 9330 0100                 		sts var1, r19 
-000084 9340 0101                 		sts var2, r20	
-000086 9310 0102                 		sts var3, r17
-000088 940e 00a2                 		call seg1 
-00008a 940e 008d                 			call wait_sec 
-00008c 9508                      	ret 
+000050 940e 0085                 		call wait_sec 
+000052 952a                      		dec r18 
+000053 f7e1                      	brne petla 
+                                 	//////////////////////seg1 
+000054 e031                      		ldi r19,0x01 
+000055 e041                      		ldi r20,1 
+000056 9330 0100                 		sts var1, r19 
+000058 9340 0101                 		sts var2, r20 
+00005a 9300 0102                 		sts var3, r16
+00005c 940e 009a                 		call seg1  
+00005e 940e 0085                 			call wait_sec 
+                                 ///////////////////////seg2 
+000060 e032                      		ldi r19,0x02 
+000061 e040                      		ldi r20,0
+000062 9330 0100                 		sts var1, r19 
+000064 9340 0101                 		sts var2, r20 
+000066 9300 0102                 		sts var3, r16
+000068 940e 009a                 		call seg1 
+00006a 940e 0085                 			call wait_sec 
+                                 		////////////////////////////seg3 
+00006c e034                      		ldi r19,0x04 
+00006d e041                      		ldi r20,1
+00006e 9330 0100                 		sts var1, r19 
+000070 9340 0101                 		sts var2, r20 
+000072 9310 0102                 		sts var3, r17
+000074 940e 009a                 		call seg1 
+000076 940e 0085                 			call wait_sec 
+                                 			////////////////////////seg4 
+000078 e038                      		ldi r19,0x08 
+000079 e040                      		ldi r20,0 
+00007a 9330 0100                 		sts var1, r19 
+00007c 9340 0101                 		sts var2, r20	
+00007e 9310 0102                 		sts var3, r17
+000080 940e 009a                 		call seg1 
+000082 940e 0085                 			call wait_sec 
+000084 9508                      	ret 
                                  
-                                 	;delay
+                                 	///////////////////////////////////opóŸnienie 
                                  wait_sec:   
-00008d 930f                      	push r16   
-00008e 931f                      	push r17   
-00008f 932f                      	push r18   
-000090 933f                      	push r19   
-000091 e001                      	ldi r16,1  
-000092 e015                      		ldi r17,5
+000085 930f                      	push r16   
+000086 931f                      	push r17   
+000087 932f                      	push r18   
+000088 933f                      	push r19   
+000089 e001                      	ldi r16,1  
+00008a e015                      		ldi r17,5
                                  		opoznienie_1:   
-000093 e129                      		ldi r18, 25
+00008b e129                      		ldi r18, 25
                                  			opoznienie_2:   
-000094 e634                      			ldi r19, 100
+00008c e634                      			ldi r19, 100
                                  				opoznienie_3:   
-000095 953a                      				dec r19   
-000096 f7f1                      				brne opoznienie_3	   
-000097 952a                      			dec r18   
-000098 f7d9                      			brne opoznienie_2   
-000099 951a                      		dec r17  
-00009a f7c1                      		brne opoznienie_1   
-00009b 950a                      	dec r16     
-00009c f781                      	brne wait_sec   
-00009d 913f                      pop r19  
-00009e 912f                      pop r18   
-00009f 911f                      pop r17   
-0000a0 910f                      pop r16   
+00008d 953a                      				dec r19   
+00008e f7f1                      				brne opoznienie_3	   
+00008f 952a                      			dec r18   
+000090 f7d9                      			brne opoznienie_2   
+000091 951a                      		dec r17  
+000092 f7c1                      		brne opoznienie_1   
+000093 950a                      	dec r16     
+000094 f781                      	brne wait_sec   
+000095 913f                      pop r19  
+000096 912f                      pop r18   
+000097 911f                      pop r17   
+000098 910f                      pop r16   
                                  
-0000a1 9508                      Ret  
-                                 		;podprogram wyswietlacze
+000099 9508                      Ret  
+                                 /////////////////////////////////////////////////////////////////////////////////////   
                                  seg1:							   
-0000a2 930f                      	push r16 
-0000a3 931f                      	push r17 
-0000a4 932f                      	push r18  
+00009a 930f                      	push r16 
+00009b 931f                      	push r17 
+00009c 932f                      	push r18  
                                  
-0000a5 e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
-0000a6 e0f0                      	ldi zh, high(2*prime)    
+00009d e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+00009e e0f0                      	ldi zh, high(2*prime)    
                                  
-0000a7 9100 0100                 	lds r16, var1	;wyswietlacz
-0000a9 9500                      	com r16                     
-0000aa b90e                      	out porte, r16  
+00009f 9100 0100                 	lds r16, var1 //////wybieranie wyœwietlacza 
+0000a1 9500                      	com r16                     
+0000a2 b90e                      	out porte, r16  
                                  
-0000ab e000                      	ldi r16, 0	;segment
-0000ac 9120 0101                 	lds r18, var2 
-0000ae 1720                      	cp r18, r16 
-0000af 9110 0102                 	lds r17, var3
-0000b1 f409                      	brne noswap 
-0000b2 9512                      	swap r17  
-                                 noswap: 
-0000b3 701f                      	andi r17, 0x0f  
-0000b4 0fe1                      	add zl, r17  
-0000b5 1ff0                      	adc zh, r16 
-0000b6 9104                      	lpm r16, z  
-0000b7 9500                      	com r16  
-0000b8 b90b                      	out portd, r16 
+0000a3 e000                      	ldi r16, 0 /////////////wybieramy segmenty  
+0000a4 9120 0101                 	lds r18, var2 
+0000a6 1720                      	cp r18, r16 
+0000a7 9110 0102                 	lds r17, var3
+0000a9 f409                      	brne bezzamiany 
+0000aa 9512                      	swap r17  
+                                 bezzamiany: 
+0000ab 701f                      	andi r17, 0x0f  
+0000ac 0fe1                      	add zl, r17  
+0000ad 1ff0                      	adc zh, r16 
+0000ae 9104                      	lpm r16, z  
+0000af 9500                      	com r16  
+0000b0 b90b                      	out portd, r16 
                                  
-0000b9 912f                      	pop r18 
-0000ba 911f                      	pop r17  
-0000bb 910f                      	pop r16  
+0000b1 912f                      	pop r18 
+0000b2 911f                      	pop r17  
+0000b3 910f                      	pop r16  
                                  
-0000bc 9508                      	ret  
+0000b4 9508                      	ret  
 
 
 RESOURCE USE INFORMATION
@@ -1732,37 +1724,37 @@ counted separately from r26..r31 here.
 "ATmega328PB" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  29 r17:  16 r18:  10 r19:  12 r20:   8 
-r21:   0 r22:   2 r23:   4 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:   4 r31:   4 
+r13:   0 r14:   0 r15:   0 r16:  27 r17:  14 r18:  10 r19:  12 r20:   8 
+r21:   0 r22:   2 r23:   2 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   2 r31:   2 
 Registers used: 10 out of 35 (28.6%)
 
 "ATmega328PB" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   2 add   :   2 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   1 add   :   1 adiw  :   0 and   :   0 
 andi  :   1 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   6 brpl  :   2 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   2 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   1 
+brne  :   6 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   1 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
-clt   :   0 clv   :   0 clz   :   0 com   :   4 cp    :   1 cpc   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   2 cp    :   1 cpc   :   0 
 cpi   :   0 cpse  :   0 dec   :   5 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :  26 lds   :   3 lpm   :   2 lsl   :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   2 
+ld    :   0 ldd   :   0 ldi   :  23 lds   :   3 lpm   :   2 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  10 pop   :   7 
-push  :   7 rcall :   0 ret   :   3 reti  :   0 rjmp  :   5 rol   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   9 pop   :   7 
+push  :   7 rcall :   0 ret   :   3 reti  :   0 rjmp  :   3 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   1 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :  12 
 sub   :   0 subi  :   1 swap  :   1 tst   :   0 wdr   :   0 
-Instructions used: 22 out of 113 (19.5%)
+Instructions used: 23 out of 113 (20.4%)
 
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00017c    274     16    290   32768   0.9%
+[.cseg] 0x000000 0x00016c    258     16    274   32768   0.8%
 [.dseg] 0x000100 0x000103      0      3      3    2048   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
