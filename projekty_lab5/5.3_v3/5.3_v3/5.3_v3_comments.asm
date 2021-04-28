@@ -11,9 +11,9 @@
 	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47	   
  .DSEG 
 .ORG 0x100 
-	var1: .BYTE 1  
-	var2: .BYTE 1  
-	var3: .BYTE 1 
+	var1: .BYTE 1				; ???
+	var2: .BYTE 1				; ???
+	var3: .BYTE 1				; ???
 	.CSEG 
 
 prog_start: 
@@ -27,10 +27,10 @@ prog_start:
 	
 	subi r16, low(38)	;M£ODSZE	
 	sbci r17, high(38)	;STARSZE
-	brvc przepelnienie									;prev ver: brvs przepelnienie				
-	brpl znak						
+    brvs przepelnienie				;Branch if Overflow Set -> if V set, go to przepelnienie			
+	brpl znak						;Branch if Plus -> if N not set, go to przepelnienie
 znak:													;dioda znaku
-	brvs obie
+	brvs obie											;jeœli oprócz
         ldi r22, 0b100000
         out portb, r22
 		rjmp licznik

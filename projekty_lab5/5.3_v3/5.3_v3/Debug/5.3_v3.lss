@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v3\5.3_v3\main.asm Mon Apr 26 19:12:28 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v3\5.3_v3\main.asm Wed Apr 28 13:58:54 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1547,7 +1547,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  
                                  
                                  
-                                 .CSEG 
+                                 .CSEG
                                  .ORG 0 
 000000 e008                      	ldi R16, HIGH(RAMEND)    
 000001 bf0e                      	out SPH, R16    
@@ -1582,7 +1582,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  	
 000040 5206                      	subi r16, low(38)	;M£ODSZE	
 000041 4010                      	sbci r17, high(38)	;STARSZE
-000042 f02b                          brvs przepelnienie				
+000042 f42b                      	brvc przepelnienie									;prev ver: brvs przepelnienie				
 000043 f402                      	brpl znak						
                                  znak:													;dioda znaku
 000044 f03b                      	brvs obie
@@ -1732,8 +1732,8 @@ Registers used: 10 out of 35 (28.6%)
 andi  :   1 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   6 brpl  :   2 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   2 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
+brne  :   6 brpl  :   2 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   1 
+brvs  :   1 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   2 cp    :   1 cpc   :   0 
 cpi   :   0 cpse  :   0 dec   :   5 eor   :   0 fmul  :   0 fmuls :   0 
@@ -1747,7 +1747,7 @@ sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :  12 
 sub   :   0 subi  :   1 swap  :   1 tst   :   0 wdr   :   0 
-Instructions used: 22 out of 113 (19.5%)
+Instructions used: 23 out of 113 (20.4%)
 
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
