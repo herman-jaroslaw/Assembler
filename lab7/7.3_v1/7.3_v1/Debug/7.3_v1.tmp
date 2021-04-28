@@ -7,7 +7,7 @@
   <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
   <DIR></DIR>
  </INCLUDE_PATH>
- <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\main.asm</SOURCE_FILE>
+ <SOURCE_FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\7.3_v1.asm</SOURCE_FILE>
  <INCLUDED_FILES>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc</FILE>
   <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc</FILE>
@@ -23,8 +23,8 @@
   <FILE>7.3_v1.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\main.asm</FILE><LINE>14</LINE></start>
-  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\main.asm</FILE><LINE>58</LINE></keypad_ISR>
-  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\main.asm</FILE><LINE>50</LINE></loop>
+  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\7.3_v1.asm</FILE><LINE>14</LINE></start>
+  <keypad_ISR><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\7.3_v1.asm</FILE><LINE>58</LINE></keypad_ISR>
+  <loop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v1\7.3_v1\7.3_v1.asm</FILE><LINE>50</LINE></loop>
  </LABELS>
 </ASSEMBLER_INFO>
