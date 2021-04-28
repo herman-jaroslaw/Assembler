@@ -32,7 +32,7 @@ start:
 		brne start
 		rjmp reset
 
-delay:             ;petla opozniajaca, delay 1/20s
+delay:             ; delay =  1/20s
    push r16
         push r17
     ldi r16,246                 ;50*(1+1+2)*246+246*3=49938
@@ -48,8 +48,8 @@ delay:             ;petla opozniajaca, delay 1/20s
         pop r16
 ret
 
-display:			; wyœwietlanie
-	ldi r26, 3
+display:			; wyœwietlanie zawartoœci licznika w formie podprogramu (pkt 3)
+	ldi r26, 3		;cztery okresy odswiezajace LED (f modyfikacji licznika = 1/5 s, bo 4*1/20=1/5)
 	wait:				; czestotliwosc modyfikacji licznika
 		
 		call delay
@@ -67,28 +67,28 @@ display:			; wyœwietlanie
 
 	ret
 
-seg1:							
+seg1:							;najstarszy segment, using r20
 	push r20
 	push r21
 
 	ldi zl, low(2*prime)
 	ldi zh, high(2*prime)
 
-	ldi r20, 0x01
-	com r20
-	out porte, r20
+	ldi r20, 0x01				;wybor najstarszego segmentu	
+	com r20						;odwrocenie wartosci rejestru r20
+	out porte, r20				;wysterowanie portu sterujacego zerami w celu uaktywnienia segmentu
 
-	swap r21
-	andi r21, 0x0f
-	add zl, r21
-	lpm r20, z
-	com r20
-	out portd, r20
+	swap r21					;zamiana miejscami polowek bajtu 
+	andi r21, 0x0f				;isolation of less significant byte half
+	add zl, r21					;adding value stored in r21 to zl (r30) 
+	lpm r20, z					;loading value from z register (r30 and r31) to r20 (starting from 1st value in prime list)
+	com r20						;inverting values in r20
+	out portd, r20				;
 
 	pop r21
 	pop r20
 	ret
-seg2:
+seg2:						;using r20
 	push r20
 	push r21
 
@@ -109,7 +109,7 @@ seg2:
 	pop r21
 	pop r20 
 	ret
-seg3:
+seg3:			;using r21
 	push r20
 	push r21
 
@@ -131,7 +131,7 @@ seg3:
 	pop r21
 	pop r20
 	ret
-seg4:
+seg4:				;using r21
 	push r20
 	push r21
 

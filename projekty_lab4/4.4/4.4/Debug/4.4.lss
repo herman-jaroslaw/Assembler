@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Tue Apr 27 15:26:29 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Wed Apr 28 20:01:48 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1587,7 +1587,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000048 f7d1                      		brne start
 000049 cff7                      		rjmp reset
                                  
-                                 delay:             ;petla opozniajaca, delay 1/20s
+                                 delay:             ; delay =  1/20s
 00004a 930f                         push r16
 00004b 931f                              push r17
 00004c ef06                          ldi r16,246                 ;50*(1+1+2)*246+246*3=49938
@@ -1603,8 +1603,8 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000054 910f                              pop r16
 000055 9508                      ret
                                  
-                                 display:			; wyœwietlanie
-000056 e0a3                      	ldi r26, 3
+                                 display:			; wyœwietlanie zawartoœci licznika w formie podprogramu (pkt 3)
+000056 e0a3                      	ldi r26, 3		;cztery okresy odswiezajace LED (f modyfikacji licznika = 1/5 s, bo 4*1/20=1/5)
                                  	wait:				; czestotliwosc modyfikacji licznika
                                  		
 000057 940e 004a                 		call delay
@@ -1622,23 +1622,23 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  
 00006b 9508                      	ret
                                  
-                                 seg1:							
+                                 seg1:							;najstarszy segment
 00006c 934f                      	push r20
 00006d 935f                      	push r21
                                  
 00006e e6e4                      	ldi zl, low(2*prime)
 00006f e0f0                      	ldi zh, high(2*prime)
                                  
-000070 e041                      	ldi r20, 0x01
-000071 9540                      	com r20
-000072 b94e                      	out porte, r20
+000070 e041                      	ldi r20, 0x01				;wybor najstarszego segmentu	
+000071 9540                      	com r20						;odwrocenie wartosci rejestru r20
+000072 b94e                      	out porte, r20				;wysterowanie portu sterujacego zerami w celu uaktywnienia segmentu
                                  
-000073 9552                      	swap r21
-000074 705f                      	andi r21, 0x0f
-000075 0fe5                      	add zl, r21
-000076 9144                      	lpm r20, z
-000077 9540                      	com r20
-000078 b94b                      	out portd, r20
+000073 9552                      	swap r21					;zamiana miejscami polowek bajtu
+000074 705f                      	andi r21, 0x0f				;isolation of less significant byte half
+000075 0fe5                      	add zl, r21					;adding value stored in r21 to zl (r30)
+000076 9144                      	lpm r20, z					;loading value from z register (r30 and r31) to r20
+000077 9540                      	com r20						;inverting values in r20
+000078 b94b                      	out portd, r20				;
                                  
 000079 915f                      	pop r21
 00007a 914f                      	pop r20
