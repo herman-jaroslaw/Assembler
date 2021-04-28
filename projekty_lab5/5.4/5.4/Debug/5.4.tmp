@@ -27,19 +27,19 @@
   <var1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>19</LINE></var1>
   <var2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>20</LINE></var2>
   <var3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>21</LINE></var3>
-  <znak><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>39</LINE></znak>
-  <diody><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>36</LINE></diody>
-  <przepelnienie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>50</LINE></przepelnienie>
-  <dzielenie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>53</LINE></dzielenie>
-  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>71</LINE></start>
-  <wyswietlanie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>74</LINE></wyswietlanie>
-  <petla><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>77</LINE></petla>
-  <wait_sec><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>116</LINE></wait_sec>
-  <seg1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>143</LINE></seg1>
-  <opoznienie_1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>123</LINE></opoznienie_1>
-  <opoznienie_2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>125</LINE></opoznienie_2>
-  <opoznienie_3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>127</LINE></opoznienie_3>
-  <bezzamiany><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>161</LINE></bezzamiany>
-  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>174</LINE></stop>
+  <znak><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>40</LINE></znak>
+  <diody><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>37</LINE></diody>
+  <przepelnienie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>51</LINE></przepelnienie>
+  <dzielenie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>54</LINE></dzielenie>
+  <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>72</LINE></start>
+  <wyswietlanie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>75</LINE></wyswietlanie>
+  <petla><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>78</LINE></petla>
+  <wait_sec><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>117</LINE></wait_sec>
+  <seg1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>144</LINE></seg1>
+  <opoznienie_1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>124</LINE></opoznienie_1>
+  <opoznienie_2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>126</LINE></opoznienie_2>
+  <opoznienie_3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>128</LINE></opoznienie_3>
+  <bezzamiany><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>162</LINE></bezzamiany>
+  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm</FILE><LINE>175</LINE></stop>
  </LABELS>
 </ASSEMBLER_INFO>

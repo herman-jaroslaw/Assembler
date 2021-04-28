@@ -27,11 +27,12 @@ prog_start:
 	out ddrd, r16	;d - display
 	out ddrb, r16	;c - diody
 
-	ldi r16, 														; 1. high(-1200) //starsze
-	ldi r17, low(-1200)	//mlodsze									; 2. high(-100) -> wyœwietla 5700
+	ldi r16, 0x02													; 1. high(-1200) //starsze
+	ldi r17, 0x26	//mlodsze									; 2. high(-100) -> wyœwietla 5700
 	
-	subi r17, 0x20
 	sbci r16, 0x00
+	subi r17, 0x20
+	
 	brmi znak														; Ad 1 WYŒWIETLA WARTOŒÆ 5b20
 diody:
     brvs przepelnienie

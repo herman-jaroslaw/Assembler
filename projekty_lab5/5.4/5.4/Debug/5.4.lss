@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm Tue Apr 27 16:42:01 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm Wed Apr 28 23:07:30 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1582,11 +1582,12 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003c b90a                      	out ddrd, r16	;d - display
 00003d b904                      	out ddrb, r16	;c - diody
                                  
-00003e ef0f                      	ldi r16, high(-100)												; 1. high(-1200) //starsze
-00003f e510                      	ldi r17, low(-1200)	//mlodsze
+00003e e002                      	ldi r16, 0x02													; 1. high(-1200) //starsze
+00003f e216                      	ldi r17, 0x26	//mlodsze									; 2. high(-100) -> wyœwietla 5700
                                  	
-000040 5210                      	subi r17, 0x20
-000041 4000                      	sbci r16, 0x00
+000040 4000                      	sbci r16, 0x00
+000041 5210                      	subi r17, 0x20
+                                 	
 000042 f01a                      	brmi znak														; Ad 1 WYŒWIETLA WARTOŒÆ 5b20
                                  diody:
 000043 f063                          brvs przepelnienie
@@ -1607,7 +1608,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000051 b976                              out pinc, r23 
                                  dzielenie:
                                  
-                                 		;(F-32) * (1/2 + 1/16)
+                                 		;(F-32) * (1/2 + 1/16)		;to nieco wiêcej ni¿ (F-32) * (5/9)
                                  		;dzielenie przez 1/2
 000052 9505                      	asr r16			
 000053 9517                      	ror r17												
