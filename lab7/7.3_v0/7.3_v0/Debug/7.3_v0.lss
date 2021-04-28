@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Tue Apr 27 18:59:33 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm Wed Apr 28 12:49:48 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\main.asm(3): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
@@ -1618,7 +1618,7 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
 000010 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-000011 e340                      		ldi r20, 0x30 
+000011 ef40                      		ldi r20, 0xf0														;previous value: 0x30 ; ???
 000012 b948                      		out portc, r20
                                  
                                  		;Select rows as interrupt triggers 
@@ -1647,11 +1647,11 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
                                  ;Keypad Interrupt Service Routine 
                                  keypad_ISR:
                                  		;Set rows as outputs and columns as inputs 
-00001e e040                      		ldi r20, 0x00													;0xf0 da³em tak jak u KB -> ???
+00001e e04f                      		ldi r20, 0b00001111													;0xf0 da³em tak jak u KB -> ???
 00001f b947                      		out ddrc, r20
                                  
                                  		;Set columns to high (pull ups) and rows to low 
-000020 e04c                      		ldi r20, 0b00001100												; j. w. 
+000020 e041                      		ldi r20, 0b00000001											; j. w. 
 000021 b948                      		out portc, r20
                                  
                                  		;Read Port C. Columns code in low nibble 
@@ -1662,11 +1662,11 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.3_v0\7.3_v0\ma
 000024 702f                      		andi r18, 0x0f
                                  
                                  		;Set rows as inputs and columns as outputs 
-000025 ef40                      		ldi r20, 0b11110000												; j. w. 
+000025 e140                      		ldi r20, 0b00010000												; j. w. 
 000026 b947                      		out ddrc, r20
                                  
                                  		;Set rows to high (pull ups) and columns to low 
-000027 ef40                      		ldi r20, 0b11110000													; j. w.
+000027 e140                      		ldi r20, 0b00010000													; j. w.
 000028 b948                      		out portc, r20
                                  
                                  		;Read Port C. Rows code in high nibble 

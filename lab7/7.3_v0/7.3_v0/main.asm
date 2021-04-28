@@ -39,7 +39,7 @@ start:
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, 0x30 
+		ldi r20, 0xf0														;previous value: 0x30 ; ???
 		out portc, r20
 
 		;Select rows as interrupt triggers 
@@ -68,11 +68,11 @@ loop:
 ;Keypad Interrupt Service Routine 
 keypad_ISR:
 		;Set rows as outputs and columns as inputs 
-		ldi r20, 0x00													;0xf0 da³em tak jak u KB -> ???
+		ldi r20, 0b00001111													;0xf0 da³em tak jak u KB -> ???
 		out ddrc, r20
 
 		;Set columns to high (pull ups) and rows to low 
-		ldi r20, 0b00001100												; j. w. 
+		ldi r20, 0b00000001											; j. w. 
 		out portc, r20
 
 		;Read Port C. Columns code in low nibble 
@@ -83,11 +83,11 @@ keypad_ISR:
 		andi r18, 0x0f
 
 		;Set rows as inputs and columns as outputs 
-		ldi r20, 0b11110000												; j. w. 
+		ldi r20, 0b00010000												; j. w. 
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, 0b11110000													; j. w.
+		ldi r20, 0b00010000													; j. w.
 		out portc, r20
 
 		;Read Port C. Rows code in high nibble 
