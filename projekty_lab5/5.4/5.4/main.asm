@@ -27,8 +27,8 @@ prog_start:
 	out ddrd, r16	;d - display
 	out ddrb, r16	;c - diody
 
-	ldi r16, 0x02													; 1. high(-1200) //starsze
-	ldi r17, 0x26	//mlodsze									; 2. high(-100) -> wyœwietla 5700
+	ldi r16, high(50)													; 1. high(-1200) //starsze
+	ldi r17, low(50)	//mlodsze									; 2. high(-100) -> wyœwietla 5700
 	
 	sbci r16, 0x00
 	subi r17, 0x20
@@ -54,9 +54,9 @@ przepelnienie:
 dzielenie:
 
 		;(F-32) * (1/2 + 1/16)		;to nieco wiêcej ni¿ (F-32) * (5/9)
-		;dzielenie przez 1/2
-	asr r16			
-	ror r17												
+		;dzielenie przez 2
+	asr r16			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
+	ror r17			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C									
 	mov r24, r16
 	mov r25, r17
 		;dzielenie przez 1/8 
@@ -114,30 +114,30 @@ wyswietlanie:
 	ret 
 
 	;delay
-wait_sec:   
-	push r16   
-	push r17   
+wait_sec:						;zmienilem rejestry
 	push r18   
 	push r19   
-	ldi r16,1  
-		ldi r17,5
+	push r20   
+	push r21   
+	ldi r18,1  
+		ldi r19,5
 		opoznienie_1:   
-		ldi r18, 25
+		ldi r20, 25
 			opoznienie_2:   
-			ldi r19, 100
+			ldi r21, 100
 				opoznienie_3:   
-				dec r19   
+				dec r21   
 				brne opoznienie_3	   
-			dec r18   
+			dec r20   
 			brne opoznienie_2   
-		dec r17  
+		dec r19  
 		brne opoznienie_1   
-	dec r16     
+	dec r18     
 	brne wait_sec   
-pop r19  
+pop r21  
+pop r20   
+pop r19   
 pop r18   
-pop r17   
-pop r16   
 
 Ret  
 ;podprogram wyswietlacze
