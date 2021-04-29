@@ -25,8 +25,8 @@ prog_start:
 	ldi r16, low(15)	;M£ODSZE									
 	ldi r17, high(15)	;STARSZE
 	
-	subi r16, low(38)	;M£ODSZE	
-	sbci r17, high(38)	;STARSZE
+	subi r16, low(5)	;M£ODSZE	
+	sbci r17, high(5)	;STARSZE
     brvs przepelnienie				;Branch if Overflow Set -> if V set, go to przepelnienie			
 	brpl znak						;Branch if Plus -> if N not set, go to przepelnienie
 znak:													;dioda znaku

@@ -27,15 +27,15 @@ prog_start:
 	out ddrd, r16
 	out ddrb, r16
 
-	;-318
-	ldi r16, low(-32000)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2		; 0000 0000 0000								
-	ldi r17, high(-32000)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
 	
-	;271
-	subi r16, low(5000)	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
-	sbci r17, high(5000)		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
-    brvs overflow	; 254 - 1 = 253 = HEX FD
-	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
+	ldi r16, low(15)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2		; 0000 0000 0000								
+	ldi r17, high(15)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+	
+	
+	subi r16, low(20)				; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
+	sbci r17, high(20)				;		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
+    brvs overflow					; 254 - 1 = 253 = HEX FD
+	brmi znak						; WYŒWIETLANY WYNIK: D420 = DEC 54 304,				;0000 0010 0100 1101
 	rjmp start
 znak:
 		ldi r31,0
@@ -44,16 +44,16 @@ znak:
 		com r17
 		add r16, r30
 		adc r17, r31	
-	brvs obie
+	brvs both
         ldi r22, 0b100000
         out portb, r22
 		rjmp start
 overflow:
-	brmi obie
+	brmi both
         ldi r23, 0b000100
         out portb, r23
 		rjmp start
-obie:
+both:
        ldi r23, 0b100100
         out portb, r23
 	
@@ -61,12 +61,12 @@ start:
 	call wyswietlanie 
 	rjmp prog_start 
 wyswietlanie: 
-	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+	ldi r18, 2 
 	petla: 
 		call wait_sec 
 		dec r18 
 	brne petla 
-								 ;wysw1 
+								 ;display1 
 		ldi r19,0x08 
 		ldi r20,1 
 		sts var1, r19 
@@ -74,7 +74,7 @@ wyswietlanie:
 		sts var3, r16
 		call seg1  
 			call wait_sec 
-								 ;wysw2
+								 ;display2
 		ldi r19,0x04 
 		ldi r20,0
 		sts var1, r19 
@@ -82,7 +82,7 @@ wyswietlanie:
 		sts var3, r16
 		call seg1 
 			call wait_sec 
-								;wysw3 
+								;display3
 		ldi r19,0x02 
 		ldi r20,1
 		sts var1, r19 
@@ -90,7 +90,7 @@ wyswietlanie:
 		sts var3, r17
 		call seg1 
 			call wait_sec 
-								;wysw4 
+								;display4
 		ldi r19,0x01 
 		ldi r20,0 
 		sts var1, r19 
@@ -127,20 +127,20 @@ pop r17
 pop r16   
 
 Ret  
-		;podprogram wyswietlacze
+		;displaying
 seg1:							   
 	push r16 
 	push r17 
 	push r18  
 
-	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+	ldi zl, low(2*prime) 
 	ldi zh, high(2*prime)    
 
-	lds r16, var1	;wyswietlacz
+	lds r16, var1	;display
 	com r16                     
 	out porte, r16  
 
-	ldi r16, 0	;segment
+	ldi r16, 0	;hex
 	lds r18, var2 
 	cp r18, r16 
 	lds r17, var3

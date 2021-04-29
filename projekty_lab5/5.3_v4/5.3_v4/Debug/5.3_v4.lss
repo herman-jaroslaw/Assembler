@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm Thu Apr 29 12:41:10 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm Thu Apr 29 19:40:20 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1582,15 +1582,15 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003c b90a                      	out ddrd, r16
 00003d b904                      	out ddrb, r16
                                  
-                                 	;-318
-00003e e000                      	ldi r16, low(-32000)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2		; 0000 0000 0000								
-00003f e813                      	ldi r17, high(-32000)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
                                  	
-                                 	;271
-000040 5808                      	subi r16, low(5000)	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
-000041 4113                      	sbci r17, high(5000)		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
-000042 f063                          brvs overflow	; 254 - 1 = 253 = HEX FD
-000043 f00a                      	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
+00003e e00f                      	ldi r16, low(15)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2		; 0000 0000 0000								
+00003f e010                      	ldi r17, high(15)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+                                 	
+                                 	
+000040 5104                      	subi r16, low(20)				; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
+000041 4010                      	sbci r17, high(20)				;		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
+000042 f063                          brvs overflow					; 254 - 1 = 253 = HEX FD
+000043 f00a                      	brmi znak						; WYŒWIETLANY WYNIK: D420 = DEC 54 304,				;0000 0010 0100 1101
 000044 c010                      	rjmp start
                                  znak:
 000045 e0f0                      		ldi r31,0
@@ -1599,16 +1599,16 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000048 9510                      		com r17
 000049 0f0e                      		add r16, r30
 00004a 1f1f                      		adc r17, r31	
-00004b f03b                      	brvs obie
+00004b f03b                      	brvs both
 00004c e260                              ldi r22, 0b100000
 00004d b965                              out portb, r22
 00004e c006                      		rjmp start
                                  overflow:
-00004f f01a                      	brmi obie
+00004f f01a                      	brmi both
 000050 e074                              ldi r23, 0b000100
 000051 b975                              out portb, r23
 000052 c002                      		rjmp start
-                                 obie:
+                                 both:
 000053 e274                             ldi r23, 0b100100
 000054 b975                              out portb, r23
                                  	
@@ -1616,12 +1616,12 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000055 940e 0058                 	call wyswietlanie 
 000057 cfe2                      	rjmp prog_start 
                                  wyswietlanie: 
-000058 e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+000058 e022                      	ldi r18, 2 
                                  	petla: 
 000059 940e 008e                 		call wait_sec 
 00005b 952a                      		dec r18 
 00005c f7e1                      	brne petla 
-                                 								 ;wysw1 
+                                 								 ;display1 
 00005d e038                      		ldi r19,0x08 
 00005e e041                      		ldi r20,1 
 00005f 9330 0100                 		sts var1, r19 
@@ -1629,7 +1629,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000063 9300 0102                 		sts var3, r16
 000065 940e 00a3                 		call seg1  
 000067 940e 008e                 			call wait_sec 
-                                 								 ;wysw2
+                                 								 ;display2
 000069 e034                      		ldi r19,0x04 
 00006a e040                      		ldi r20,0
 00006b 9330 0100                 		sts var1, r19 
@@ -1637,7 +1637,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00006f 9300 0102                 		sts var3, r16
 000071 940e 00a3                 		call seg1 
 000073 940e 008e                 			call wait_sec 
-                                 								;wysw3 
+                                 								;display3
 000075 e032                      		ldi r19,0x02 
 000076 e041                      		ldi r20,1
 000077 9330 0100                 		sts var1, r19 
@@ -1645,7 +1645,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00007b 9310 0102                 		sts var3, r17
 00007d 940e 00a3                 		call seg1 
 00007f 940e 008e                 			call wait_sec 
-                                 								;wysw4 
+                                 								;display4
 000081 e031                      		ldi r19,0x01 
 000082 e040                      		ldi r20,0 
 000083 9330 0100                 		sts var1, r19 
@@ -1682,20 +1682,20 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 0000a1 910f                      pop r16   
                                  
 0000a2 9508                      Ret  
-                                 		;podprogram wyswietlacze
+                                 		;displaying
                                  seg1:							   
 0000a3 930f                      	push r16 
 0000a4 931f                      	push r17 
 0000a5 932f                      	push r18  
                                  
-0000a6 e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+0000a6 e6e4                      	ldi zl, low(2*prime) 
 0000a7 e0f0                      	ldi zh, high(2*prime)    
                                  
-0000a8 9100 0100                 	lds r16, var1	;wyswietlacz
+0000a8 9100 0100                 	lds r16, var1	;display
 0000aa 9500                      	com r16                     
 0000ab b90e                      	out porte, r16  
                                  
-0000ac e000                      	ldi r16, 0	;segment
+0000ac e000                      	ldi r16, 0	;hex
 0000ad 9120 0101                 	lds r18, var2 
 0000af 1720                      	cp r18, r16 
 0000b0 9110 0102                 	lds r17, var3
