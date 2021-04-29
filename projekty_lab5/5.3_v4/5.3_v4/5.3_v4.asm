@@ -28,13 +28,13 @@ prog_start:
 	out ddrb, r16
 
 	;-318
-	ldi r16, 0xC2	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2									
-	ldi r17, 0xFE	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+	ldi r16, low(-32000)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2		; 0000 0000 0000								
+	ldi r17, high(-32000)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
 	
 	;271
-	subi r16,0x0F	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
-	sbci r17,0x01		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
-    brvs przepelnienie	; 254 - 1 = 253 = HEX FD
+	subi r16, low(5000)	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
+	sbci r17, high(5000)		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
+    brvs overflow	; 254 - 1 = 253 = HEX FD
 	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
 	rjmp start
 znak:
@@ -48,7 +48,7 @@ znak:
         ldi r22, 0b100000
         out portb, r22
 		rjmp start
-przepelnienie:
+overflow:
 	brmi obie
         ldi r23, 0b000100
         out portb, r23
