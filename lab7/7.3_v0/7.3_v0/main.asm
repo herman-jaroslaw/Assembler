@@ -4,9 +4,9 @@
 .cseg 
 .org 0 
 		jmp start
-.org PCINT1addr																	; ???
+.org PCINT1addr																	
 		rjmp keypad_ISR ;Keypad External Interrupt Request
-		;.def button_code=r20													; ???
+		;.def button_code=r20													
 ;----------------------------------------------------------------------------------- 
 ;Initialization
 start:
@@ -21,37 +21,21 @@ start:
 		ldi r16, 0xFF 
 		out ddrb, r16 
 
-		; Clear intf2 flag
-		;
-		;
-
-		; Enable Int2
-		;
-		;
-
-		; Set Int2 active on falling edge
-		;
-		;
-
 		;SET UP KEYPAD, 2 rows x 4 cols 
 		;Set rows as inputs and columns as outputs 
 		ldi r20, 0x0f 
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, 0xf0														;previous value: 0x30 ; ???
+		ldi r20, 0xf0														
 		out portc, r20
 
-		;Select rows as interrupt triggers 
-		ldi r20, (1<<pcint12)|(1<<pcint13)						;12 i 13 dobre ???
+		;Select rows as interrupt triggers			;PIN CHANGE MASK
+		ldi r20, (1<<pcint12)|(1<<pcint13)				;make interrupt on portc.5 and portc.4 active
 		sts pcmsk1, r20
 
-		;Global Enable Interrupt
-		;
-
-
-		;Enable pcint1 
-		ldi r20, (1<<pcie1) 
+		;Enable pcint1								;PIN CHANGE INTERRUPT CONTROL - zadecydowanie, ktore piny beda braly udzial w aktywacji przerwania
+		ldi r20, (1<<pcie1)						;store value from bit pcie1=1 in r20
 		sts pcicr, r20
 
 		;Reset register for output 
@@ -68,11 +52,11 @@ loop:
 ;Keypad Interrupt Service Routine 
 keypad_ISR:
 		;Set rows as outputs and columns as inputs 
-		ldi r20, 0b00110000													;0xf0 da³em tak jak u KB -> ???
+		ldi r20, 0b00110000													;here
 		out ddrc, r20
 
 		;Set columns to high (pull ups) and rows to low 
-		ldi r20, 0b00110000											; j. w. 
+		ldi r20, 0b00110000											;here 
 		out portc, r20
 
 		;Read Port C. Columns code in low nibble 
@@ -83,12 +67,11 @@ keypad_ISR:
 		andi r18, 0x0f
 
 		;Set rows as inputs and columns as outputs 
-		ldi r20, 0b00001111												; j. w. 
+		ldi r20, 0b00001111												;here
 		out ddrc, r20
 
 		;Set rows to high (pull ups) and columns to low 
-		ldi r20, 0b00001111													; j. w.
-		out portc, r20
+		ldi r20, 0b00001111													;here
 
 		;Read Port C. Rows code in high nibble 
 		in r16, pinc
