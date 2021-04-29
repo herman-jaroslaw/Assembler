@@ -1,4 +1,4 @@
-;5.4 - wersja AZ zmodyfikowana
+;5.4_v2 -> AZ
 ;port b - LED
 ;port c - switch
 ;port d - 7hex display
@@ -23,17 +23,16 @@
 
 prog_start: 
 	ldi r16, $ff    
-	out ddre, r16   ;b - control
-	out ddrd, r16	;d - display
-	out ddrb, r16	;c - diody
+	out ddre, r16    
+	out ddrd, r16
+	out ddrb, r16 
 
-	ldi r16, high(-100)													; 1. high(-1200) //starsze
-	ldi r17, low(-100)	//mlodsze									; 2. high(-100) -> wyœwietla 5700
+	ldi r16, high(-100) //starsze
+	ldi r17, low(-100)	//mlodsze
 	
-	sbci r16, 0x00
 	subi r17, 0x20
-	
-	brmi znak														; Ad 1 WYŒWIETLA WARTOŒÆ 5b20
+	sbci r16, 0x00
+	brmi znak
 diody:
     brvs przepelnienie
 	jmp dzielenie
@@ -46,17 +45,17 @@ znak:
 		adc r16,r31
 				
         ldi r22, 0b100000  
-        out pinc, r22
+        out pinb, r22
 		jmp diody															
 przepelnienie:
         ldi r23, 0b001000 
-        out pinc, r23 
+        out pinb, r23 
 dzielenie:
 
-		;(F-32) * (1/2 + 1/16)		;to nieco wiêcej ni¿ (F-32) * (5/9)
-		;dzielenie przez 2
-	asr r16			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
-	ror r17			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C									
+		;(F-32) * (1/2 + 1/16)
+		;dzielenie przez 1/2
+	asr r16			
+	ror r17												
 	mov r24, r16
 	mov r25, r17
 		;dzielenie przez 1/8 
@@ -80,7 +79,7 @@ wyswietlanie:
 		dec r18 
 	brne petla 
 									 ;wysw1 
-		ldi r19,0x01 
+		ldi r19,0x08 
 		ldi r20,1 
 		sts var1, r19 
 		sts var2, r20 
@@ -88,7 +87,7 @@ wyswietlanie:
 		call seg1  
 			call wait_sec 
 									;wysw2
-		ldi r19,0x02 
+		ldi r19,0x04 
 		ldi r20,0
 		sts var1, r19 
 		sts var2, r20 
@@ -96,7 +95,7 @@ wyswietlanie:
 		call seg1 
 			call wait_sec 
 									;wysw3
-		ldi r19,0x04 
+		ldi r19,0x02 
 		ldi r20,1
 		sts var1, r19 
 		sts var2, r20 
@@ -104,7 +103,7 @@ wyswietlanie:
 		call seg1 
 			call wait_sec 
 									;wysw4 
-		ldi r19,0x08 
+		ldi r19,0x01 
 		ldi r20,0 
 		sts var1, r19 
 		sts var2, r20	
@@ -114,30 +113,30 @@ wyswietlanie:
 	ret 
 
 	;delay
-wait_sec:						;zmienilem rejestry
+wait_sec:   
+	push r16   
+	push r17   
 	push r18   
 	push r19   
-	push r20   
-	push r21   
-	ldi r18,1  
-		ldi r19,5
+	ldi r16,1  
+		ldi r17,5
 		opoznienie_1:   
-		ldi r20, 25
+		ldi r18, 25
 			opoznienie_2:   
-			ldi r21, 100
+			ldi r19, 100
 				opoznienie_3:   
-				dec r21   
+				dec r19   
 				brne opoznienie_3	   
-			dec r20   
+			dec r18   
 			brne opoznienie_2   
-		dec r19  
+		dec r17  
 		brne opoznienie_1   
-	dec r18     
+	dec r16     
 	brne wait_sec   
-pop r21  
-pop r20   
-pop r19   
+pop r19  
 pop r18   
+pop r17   
+pop r16   
 
 Ret  
 ;podprogram wyswietlacze
@@ -161,8 +160,8 @@ seg1:
 	swap r17  
 bezzamiany: 
 	andi r17, 0x0f  
-	add zl, r16  
-	adc zh, r17 
+	add zl, r17  
+	adc zh, r16 
 	lpm r16, z  
 	com r16  
 	out portd, r16 

@@ -1,4 +1,4 @@
-;5.4_v1
+;5.4_v1 - latest version
 ;port b - LED
 ;port c - switch
 ;port d - 7hex display
@@ -27,15 +27,15 @@ prog_start:
 	out ddrd, r16
 	out ddrb, r16
 
-	;-318
-	ldi r16, low(100)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2									
-	ldi r17, high(50)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
 	
-	;271
+	ldi r16, low(-50)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2	;9C = U2 1001 1100 = BIN 0110 0100							
+	ldi r17, high(-50)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
+	
+	
 	subi r16,0x20	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
 	sbci r17,0x00		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
     brvs przepelnienie	; 254 - 1 = 253 = HEX FD
-	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
+	brmi znak			
 	jmp dzielenie
 znak:
 		ldi r31,0
