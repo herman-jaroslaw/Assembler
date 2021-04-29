@@ -23,8 +23,8 @@
   <FILE>7.2_v0.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <main><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>16</LINE></main>
-  <int0_isr><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>32</LINE></int0_isr>
-  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>29</LINE></stop>
+  <main><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>15</LINE></main>
+  <int0_isr><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>31</LINE></int0_isr>
+  <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm</FILE><LINE>28</LINE></stop>
  </LABELS>
 </ASSEMBLER_INFO>

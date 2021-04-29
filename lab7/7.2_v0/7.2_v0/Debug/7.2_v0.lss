@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm Mon Apr 26 21:35:00 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm Thu Apr 29 17:41:54 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
-C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
+C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
-C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
+C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
                                  
-                                 ;
+                                 ;7.2_v0
                                  
                                  
                                  ;*************************************************************************
@@ -1549,14 +1549,13 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\ma
                                  
                                  
                                  
-                                 ; lab7_zad71.asm
                                  ;
                                  ; Created: 2021-04-26 19:47:08
                                  ; Author : DELL
                                  ;
                                  
                                  
-                                 #include "m328pbdef.inc" 
+                                 #include "m328pbdef.inc"			
                                  
                                  
                                  ;*************************************************************************
@@ -1600,11 +1599,11 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.2_v0\7.2_v0\ma
                                  
 00000c 9a25                      	sbi ddrb, 5 ;portb.5 is output (led0) 
 00000d 9a2f                      	sbi portb, 7 ;pull-up enable for portd.2 
-00000e e840                      	ldi r20, (1<<pcint7) 
-00000f 9340 006b                 	sts pcmsk0, r20 ;enable int0 
-000011 e041                      	ldi r20, (1<<pcie0)										;dobrze czy nie 3 ???
-000012 9340 0068                 	sts pcicr, r20
-000014 9478                      	sei ;enable interrupts 
+00000e e840                      	ldi r20, (1<<pcint7)							;MSB in register pcmsk0
+00000f 9340 006b                 	sts pcmsk0, r20 ;enable int0					
+000011 e041                      	ldi r20, (1<<pcie0)
+000012 9340 0068                 	sts pcicr, r20									;if high, reaction to interrupt			;store r20 in pcicr	(Pin Change Interrput Control)
+000014 9478                      	sei ;enable interrupts						
                                  stop: 
 000015 940c 0015                 	jmp stop ;stay forever 
                                  ;------- int0 ISR ------- 

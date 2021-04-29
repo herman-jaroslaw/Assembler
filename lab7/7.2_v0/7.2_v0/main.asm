@@ -5,7 +5,7 @@
 ;
 
 
-#include "m328pbdef.inc"			;czemu hash?
+#include "m328pbdef.inc"			
 
 .org 0 
 	jmp main ;skip vector table 
@@ -20,11 +20,11 @@ main:
 
 	sbi ddrb, 5 ;portb.5 is output (led0) 
 	sbi portb, 7 ;pull-up enable for portd.2 
-	ldi r20, (1<<pcint7) 
-	sts pcmsk0, r20 ;enable int0 
-	ldi r20, (1<<pcie0)										;pcie0 ma byæ, nie wiem w sumie czemu
-	sts pcicr, r20
-	sei ;enable interrupts 
+	ldi r20, (1<<pcint7)							;MSB in register pcmsk0
+	sts pcmsk0, r20 ;enable int0					
+	ldi r20, (1<<pcie0)
+	sts pcicr, r20									;if high, reaction to interrupt			;sts: store r20 in pcicr (Pin Change Interrput Control)
+	sei ;enable interrupts						
 stop: 
 	jmp stop ;stay forever 
 ;------- int0 ISR ------- 
