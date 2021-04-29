@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm Thu Apr 29 11:43:02 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v1.asm Thu Apr 29 12:21:31 2021
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1151,17 +1151,17 @@ CSEG prime        00000032
 DSEG var1         00000100
 DSEG var2         00000101
 DSEG var3         00000102
-CSEG znak         00000046
-CSEG diody        00000043
 CSEG przepelnienie 00000050
-CSEG dzielenie    00000052
-CSEG start        0000005e
-CSEG wyswietlanie 00000061
-CSEG petla        00000062
-CSEG wait_sec     00000097
-CSEG seg1         000000ac
-CSEG opoznienie_1 0000009d
-CSEG opoznienie_2 0000009e
-CSEG opoznienie_3 0000009f
-CSEG bezzamiany   000000bd
-CSEG stop         000000c7
+CSEG znak         00000046
+CSEG dzielenie    00000056
+CSEG obie         00000054
+CSEG start        00000062
+CSEG wyswietlanie 00000065
+CSEG petla        00000066
+CSEG wait_sec     0000009b
+CSEG seg1         000000b0
+CSEG opoznienie_1 000000a1
+CSEG opoznienie_2 000000a2
+CSEG opoznienie_3 000000a3
+CSEG noswap       000000c1
+CSEG stop         000000cb

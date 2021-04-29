@@ -161,8 +161,8 @@ seg1:
 	swap r17  
 bezzamiany: 
 	andi r17, 0x0f  
-	add zl, r17  
-	adc zh, r16 
+	add zl, r16  
+	adc zh, r17 
 	lpm r16, z  
 	com r16  
 	out portd, r16 

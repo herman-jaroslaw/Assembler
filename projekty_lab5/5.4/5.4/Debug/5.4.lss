@@ -1,10 +1,10 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\main.asm Thu Apr 29 11:43:02 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v1.asm Thu Apr 29 12:21:31 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
                                  
-                                 ;5.4
+                                 ;5.4_v1
                                  
                                  
                                  ;*************************************************************************
@@ -1558,7 +1558,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000001 bf0e                      	out SPH, R16    
 000002 ef0f                      	ldi R16, LOW(RAMEND)    ;stos
 000003 bf0d                      	out SPL, R16    
-                                  
+                                 
 000004 c035                      	rjmp prog_start     
                                      .org 0x32  
 000032 307e
@@ -1568,165 +1568,173 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000036 7b7f
 000037 1f77
 000038 3d4e
-000039 474f                      	prime: .DB 0x7e, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7F, 0x7B, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47 	   ;lista
+000039 474f                      	prime: .DB 0x7E, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7f, 0x7b, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47
                                   .DSEG 
                                  .ORG 0x100 
 000100                           	var1: .BYTE 1  
-000101                           	var2: .BYTE 1  ;parametry do podprogramu
+000101                           	var2: .BYTE 1	;parametry do podprogramu
 000102                           	var3: .BYTE 1 
                                  	.CSEG 
                                  
                                  prog_start: 
 00003a ef0f                      	ldi r16, $ff    
-00003b b90d                      	out ddre, r16   ;b - control
-00003c b90a                      	out ddrd, r16	;d - display
-00003d b904                      	out ddrb, r16	;c - diody
+00003b b90d                      	out ddre, r16    
+00003c b90a                      	out ddrd, r16
+00003d b904                      	out ddrb, r16
                                  
-00003e e000                      	ldi r16, high(50)													; 1. high(-1200) //starsze
-00003f e312                      	ldi r17, low(50)	//mlodsze									; 2. high(-100) -> wyœwietla 5700
+                                 	;-318
+00003e e604                      	ldi r16, low(100)	;mlodsze	= DEC 194 = BIN 1100 0010 = U2 0011 1110			;0xC2									
+00003f e010                      	ldi r17, high(50)	;starsze = DEC 254 = BIN 1111 1110 = U2 0000 0010				;0xFE
                                  	
-000040 4000                      	sbci r16, 0x00
-000041 5210                      	subi r17, 0x20
-                                 	
-000042 f01a                      	brmi znak														; Ad 1 WYŒWIETLA WARTOŒÆ 5b20
-                                 diody:
-000043 f063                          brvs przepelnienie
-000044 940c 0052                 	jmp dzielenie
+                                 	;271
+000040 5200                      	subi r16,0x20	; = DEC 15 = BIN 0000 1111 = U2 1111 0001	; 194 - 15 = 179 = HEX B3			;0x0F
+000041 4010                      	sbci r17,0x00		;-318 - 271 = -589		; = DEC 1 = BIN 0000 0001 = U2 1111 1111			;0x01
+000042 f06b                          brvs przepelnienie	; 254 - 1 = 253 = HEX FD
+000043 f012                      	brmi znak			; WYŒWIETLANY WYNIK: D420 = DEC 54 304, a z moich obliczen wynika, ze FDB3 to 64947				;0000 0010 0100 1101
+000044 940c 0056                 	jmp dzielenie
                                  znak:
 000046 e0f0                      		ldi r31,0
 000047 e0e1                      		ldi r30,1
 000048 9500                      		com r16
 000049 9510                      		com r17
-00004a 0f1e                      		add r17,r30
-00004b 1f0f                      		adc r16,r31
-                                 				
-00004c e260                              ldi r22, 0b100000  
-00004d b966                              out pinc, r22
-00004e 940c 0043                 		jmp diody															
+00004a 0f0e                      		add r16, r30
+00004b 1f1f                      		adc r17, r31	
+00004c f03b                      	brvs obie
+00004d e260                              ldi r22, 0b100000
+00004e b965                              out portb, r22
+00004f c012                      		rjmp start
                                  przepelnienie:
-000050 e078                              ldi r23, 0b001000 
-000051 b976                              out pinc, r23 
+000050 f01a                      	brmi obie
+000051 e074                              ldi r23, 0b000100
+000052 b975                              out portb, r23
+000053 c00e                      		rjmp start
+                                 obie:
+000054 e274                             ldi r23, 0b100100
+000055 b975                              out portb, r23
+                                 		
                                  dzielenie:
                                  
                                  		;(F-32) * (1/2 + 1/16)		;to nieco wiêcej ni¿ (F-32) * (5/9)
                                  		;dzielenie przez 2
-000052 9505                      	asr r16			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
-000053 9517                      	ror r17			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C									
-000054 2f80                      	mov r24, r16
-000055 2f91                      	mov r25, r17
+000056 9515                      	asr r17			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
+000057 9507                      	ror r16			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C									
+000058 2f81                      	mov r24, r17
+000059 2f90                      	mov r25, r16
                                  		;dzielenie przez 1/8 
-000056 9505                      	asr r16			; w poni¿szych komendach wykonujê tak¹ operacjê jeszcze 3 razy
-000057 9517                      	ror r17			
-000058 9505                      	asr r16
-000059 9517                      	ror r17
-00005a 9505                      	asr r16
-00005b 9517                      	ror r17
-00005c 0f19                      	add r17, r25	; dodajemy (1/2 + 1/16)
-00005d 1f08                      	adc r16, r24	
+00005a 9515                      	asr r17			; w poni¿szych komendach wykonujê tak¹ operacjê jeszcze 3 razy
+00005b 9507                      	ror r16			
+00005c 9515                      	asr r17
+00005d 9507                      	ror r16
+00005e 9515                      	asr r17
+00005f 9507                      	ror r16
+000060 0f09                      	add r16, r25	; dodajemy (1/2 + 1/16)
+000061 1f18                      	adc r17, r24	
                                  
-                                 start: 
-00005e 940e 0061                 	call wyswietlanie
-000060 cfd9                      	rjmp prog_start 
+                                 start:
+000062 940e 0065                 	call wyswietlanie 
+000064 cfd5                      	rjmp prog_start 
                                  wyswietlanie: 
-000061 e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
-                                 
+000065 e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
                                  	petla: 
-000062 940e 0097                 		call wait_sec 
-000064 952a                      		dec r18 
-000065 f7e1                      	brne petla 
-                                 									 ;wysw1 
-000066 e031                      		ldi r19,0x01 
-000067 e041                      		ldi r20,1 
-000068 9330 0100                 		sts var1, r19 
-00006a 9340 0101                 		sts var2, r20 
-00006c 9310 0102                 		sts var3, r17
-00006e 940e 00ac                 		call seg1  
-000070 940e 0097                 			call wait_sec 
-                                 									;wysw2
-000072 e032                      		ldi r19,0x02 
-000073 e040                      		ldi r20,0
-000074 9330 0100                 		sts var1, r19 
-000076 9340 0101                 		sts var2, r20 
-000078 9310 0102                 		sts var3, r17
-00007a 940e 00ac                 		call seg1 
-00007c 940e 0097                 			call wait_sec 
-                                 									;wysw3
-00007e e034                      		ldi r19,0x04 
-00007f e041                      		ldi r20,1
-000080 9330 0100                 		sts var1, r19 
-000082 9340 0101                 		sts var2, r20 
-000084 9300 0102                 		sts var3, r16
-000086 940e 00ac                 		call seg1 
-000088 940e 0097                 			call wait_sec 
-                                 									;wysw4 
-00008a e038                      		ldi r19,0x08 
-00008b e040                      		ldi r20,0 
-00008c 9330 0100                 		sts var1, r19 
-00008e 9340 0101                 		sts var2, r20	
-000090 9300 0102                 		sts var3, r16
-000092 940e 00ac                 		call seg1 
-000094 940e 0097                 			call wait_sec 
-000096 9508                      	ret 
+000066 940e 009b                 		call wait_sec 
+000068 952a                      		dec r18 
+000069 f7e1                      	brne petla 
+                                 								 ;wysw1 
+00006a e038                      		ldi r19,0x08 
+00006b e041                      		ldi r20,1 
+00006c 9330 0100                 		sts var1, r19 
+00006e 9340 0101                 		sts var2, r20 
+000070 9300 0102                 		sts var3, r16
+000072 940e 00b0                 		call seg1  
+000074 940e 009b                 			call wait_sec 
+                                 								 ;wysw2
+000076 e034                      		ldi r19,0x04 
+000077 e040                      		ldi r20,0
+000078 9330 0100                 		sts var1, r19 
+00007a 9340 0101                 		sts var2, r20 
+00007c 9300 0102                 		sts var3, r16
+00007e 940e 00b0                 		call seg1 
+000080 940e 009b                 			call wait_sec 
+                                 								;wysw3 
+000082 e032                      		ldi r19,0x02 
+000083 e041                      		ldi r20,1
+000084 9330 0100                 		sts var1, r19 
+000086 9340 0101                 		sts var2, r20 
+000088 9310 0102                 		sts var3, r17
+00008a 940e 00b0                 		call seg1 
+00008c 940e 009b                 			call wait_sec 
+                                 								;wysw4 
+00008e e031                      		ldi r19,0x01 
+00008f e040                      		ldi r20,0 
+000090 9330 0100                 		sts var1, r19 
+000092 9340 0101                 		sts var2, r20	
+000094 9310 0102                 		sts var3, r17
+000096 940e 00b0                 		call seg1 
+000098 940e 009b                 			call wait_sec 
+00009a 9508                      	ret 
                                  
                                  	;delay
                                  wait_sec:   
-000097 932f                      	push r18   
-000098 933f                      	push r19   
-000099 934f                      	push r20   
-00009a 935f                      	push r21   
-00009b e021                      	ldi r18,1  
-00009c e035                      		ldi r19,5
+00009b 930f                      	push r16   
+00009c 931f                      	push r17   
+00009d 932f                      	push r18   
+00009e 933f                      	push r19   
+00009f e001                      	ldi r16,1  
+0000a0 e015                      		ldi r17,5
                                  		opoznienie_1:   
-00009d e149                      		ldi r20, 25
+0000a1 e129                      		ldi r18, 25
                                  			opoznienie_2:   
-00009e e654                      			ldi r21, 100
+0000a2 e634                      			ldi r19, 100
                                  				opoznienie_3:   
-00009f 955a                      				dec r21   
-0000a0 f7f1                      				brne opoznienie_3	   
-0000a1 954a                      			dec r20   
-0000a2 f7d9                      			brne opoznienie_2   
-0000a3 953a                      		dec r19  
-0000a4 f7c1                      		brne opoznienie_1   
-0000a5 952a                      	dec r18     
-0000a6 f781                      	brne wait_sec   
-0000a7 915f                      pop r21  
-0000a8 914f                      pop r20   
-0000a9 913f                      pop r19   
-0000aa 912f                      pop r18   
+0000a3 953a                      				dec r19   
+0000a4 f7f1                      				brne opoznienie_3	   
+0000a5 952a                      			dec r18   
+0000a6 f7d9                      			brne opoznienie_2   
+0000a7 951a                      		dec r17  
+0000a8 f7c1                      		brne opoznienie_1   
+0000a9 950a                      	dec r16     
+0000aa f781                      	brne wait_sec   
+0000ab 913f                      pop r19  
+0000ac 912f                      pop r18   
+0000ad 911f                      pop r17   
+0000ae 910f                      pop r16   
                                  
-0000ab 9508                      Ret  
-                                 ;podprogram wyswietlacze
+0000af 9508                      Ret  
+                                 		;podprogram wyswietlacze
                                  seg1:							   
-0000ac 930f                      	push r16 
-0000ad 931f                      	push r17 
-0000ae 932f                      	push r18  
+0000b0 930f                      	push r16 
+0000b1 931f                      	push r17 
+0000b2 932f                      	push r18  
                                  
-0000af e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
-0000b0 e0f0                      	ldi zh, high(2*prime)    
+0000b3 e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+0000b4 e0f0                      	ldi zh, high(2*prime)    
                                  
-0000b1 9100 0100                 	lds r16, var1 ;wyswietlacz
-0000b3 9500                      	com r16                     
-0000b4 b90e                      	out porte, r16  
+0000b5 9100 0100                 	lds r16, var1	;wyswietlacz
+0000b7 9500                      	com r16                     
+0000b8 b90e                      	out porte, r16  
                                  
-0000b5 e000                      	ldi r16, 0 ;segment 
-0000b6 9120 0101                 	lds r18, var2 
-0000b8 1720                      	cp r18, r16 
-0000b9 9110 0102                 	lds r17, var3
-0000bb f409                      	brne bezzamiany 
-0000bc 9512                      	swap r17  
-                                 bezzamiany: 
-0000bd 701f                      	andi r17, 0x0f  
-0000be 0fe1                      	add zl, r17  
-0000bf 1ff0                      	adc zh, r16 
-0000c0 9104                      	lpm r16, z  
-0000c1 9500                      	com r16  
-0000c2 b90b                      	out portd, r16 
+0000b9 e000                      	ldi r16, 0	;segment
+0000ba 9120 0101                 	lds r18, var2 
+0000bc 1720                      	cp r18, r16 
+0000bd 9110 0102                 	lds r17, var3
+0000bf f409                      	brne noswap 
+0000c0 9512                      	swap r17  
+                                 noswap: 
+0000c1 701f                      	andi r17, 0x0f  
+0000c2 0fe1                      	add zl, r17  
+0000c3 1ff0                      	adc zh, r16 
+0000c4 9104                      	lpm r16, z  
+0000c5 9500                      	com r16  
+0000c6 b90b                      	out portd, r16 
                                  
-0000c3 912f                      	pop r18 
-0000c4 911f                      	pop r17  
-0000c5 910f                      	pop r16  
+0000c7 912f                      	pop r18 
+0000c8 911f                      	pop r17  
+0000c9 910f                      	pop r16  
                                  
-0000c6 9508                      	ret  
+0000ca 9508                      	ret  
+0000cb cfff                      stop: rjmp stop
+                                 
+                                 ;r16 fc
 
 
 RESOURCE USE INFORMATION
@@ -1746,26 +1754,26 @@ counted separately from r26..r31 here.
 "ATmega328PB" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  31 r17:  18 r18:  10 r19:  12 r20:  12 
-r21:   4 r22:   2 r23:   2 r24:   2 r25:   2 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  35 r17:  22 r18:  10 r19:  12 r20:   8 
+r21:   0 r22:   2 r23:   4 r24:   2 r25:   2 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   4 r31:   4 
-Registers used: 13 out of 35 (37.1%)
+Registers used: 12 out of 35 (34.3%)
 
 "ATmega328PB" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   3 add   :   3 adiw  :   0 and   :   0 
 andi  :   1 asr   :   4 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   1 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   2 
 brne  :   6 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   1 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
+brvs  :   2 bset  :   0 bst   :   0 call  :  10 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   4 cp    :   1 cpc   :   0 
 cpi   :   0 cpse  :   0 dec   :   5 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   2 
-ld    :   0 ldd   :   0 ldi   :  25 lds   :   3 lpm   :   2 lsl   :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   1 
+ld    :   0 ldd   :   0 ldi   :  26 lds   :   3 lpm   :   2 lsl   :   0 
 lsr   :   0 mov   :   2 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :   9 pop   :   7 
-push  :   7 rcall :   0 ret   :   3 reti  :   0 rjmp  :   3 rol   :   0 
+neg   :   0 nop   :   0 or    :   0 ori   :   0 out   :  10 pop   :   7 
+push  :   7 rcall :   0 ret   :   3 reti  :   0 rjmp  :   5 rol   :   0 
 ror   :   4 sbc   :   0 sbci  :   1 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
@@ -1776,7 +1784,7 @@ Instructions used: 26 out of 113 (23.0%)
 "ATmega328PB" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000190    294     16    310   32768   0.9%
+[.cseg] 0x000000 0x000198    302     16    318   32768   1.0%
 [.dseg] 0x000100 0x000103      0      3      3    2048   0.1%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
