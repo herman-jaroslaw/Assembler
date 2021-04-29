@@ -28,8 +28,8 @@
   <var2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>20</LINE></var2>
   <var3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>21</LINE></var3>
   <znak><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>39</LINE></znak>
-  <diody><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>36</LINE></diody>
-  <przepelnienie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>50</LINE></przepelnienie>
+  <diodes><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>36</LINE></diodes>
+  <overflow><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>50</LINE></overflow>
   <dzielenie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>53</LINE></dzielenie>
   <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>71</LINE></start>
   <wyswietlanie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>74</LINE></wyswietlanie>
@@ -39,7 +39,7 @@
   <opoznienie_1><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>123</LINE></opoznienie_1>
   <opoznienie_2><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>125</LINE></opoznienie_2>
   <opoznienie_3><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>127</LINE></opoznienie_3>
-  <bezzamiany><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>161</LINE></bezzamiany>
+  <no_swap><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>161</LINE></no_swap>
   <stop><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm</FILE><LINE>174</LINE></stop>
  </LABELS>
 </ASSEMBLER_INFO>

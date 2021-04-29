@@ -8,7 +8,7 @@
 .ORG 0 
 	ldi R16, HIGH(RAMEND)    
 	out SPH, R16    
-	ldi R16, LOW(RAMEND)    ;stos
+	ldi R16, LOW(RAMEND)    ;stack
 	out SPL, R16    
  
 	rjmp prog_start     
@@ -17,7 +17,7 @@
  .DSEG 
 .ORG 0x100 
 	var1: .BYTE 1  
-	var2: .BYTE 1  ;parametry do podprogramu
+	var2: .BYTE 1  ;parameters
 	var3: .BYTE 1 
 	.CSEG 
 
@@ -27,14 +27,14 @@ prog_start:
 	out ddrd, r16
 	out ddrb, r16 
 
-	ldi r16, high(-100) //starsze
-	ldi r17, low(-100)	//mlodsze
+	ldi r16, high(-100) ;MS bits
+	ldi r17, low(-100)	;LS bits
 	
 	subi r17, 0x20
 	sbci r16, 0x00
 	brmi znak
-diody:
-    brvs przepelnienie
+diodes:
+    brvs overflow
 	jmp dzielenie
 znak:
 		ldi r31,0
@@ -46,39 +46,39 @@ znak:
 				
         ldi r22, 0b100000  
         out pinb, r22
-		jmp diody															
-przepelnienie:
+		jmp diodes															
+overflow:
         ldi r23, 0b001000 
         out pinb, r23 
 dzielenie:
 
 		;(F-32) * (1/2 + 1/16)
 		;dzielenie przez 1/2
-	asr r16			
-	ror r17												
+	asr r16			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
+	ror r17			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C												
 	mov r24, r16
 	mov r25, r17
-		;dzielenie przez 1/8 
-	asr r16			; w poni¿szych komendach wykonujê tak¹ operacjê jeszcze 3 razy
+		 
+	asr r16			; repeating same operation 3 times
 	ror r17			
 	asr r16
 	ror r17
 	asr r16
 	ror r17
-	add r17, r25	; dodajemy (1/2 + 1/16)
+	add r17, r25	;(1/2 + 1/16)
 	adc r16, r24	
 
 start: 
 	call wyswietlanie
 	rjmp prog_start 
 wyswietlanie: 
-	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+	ldi r18, 2 ; r18 -> changing numbers every 1/5s
 
 	petla: 
 		call wait_sec 
 		dec r18 
 	brne petla 
-									 ;wysw1 
+									 ;display1 
 		ldi r19,0x08 
 		ldi r20,1 
 		sts var1, r19 
@@ -86,7 +86,7 @@ wyswietlanie:
 		sts var3, r17
 		call seg1  
 			call wait_sec 
-									;wysw2
+									;display2
 		ldi r19,0x04 
 		ldi r20,0
 		sts var1, r19 
@@ -94,7 +94,7 @@ wyswietlanie:
 		sts var3, r17
 		call seg1 
 			call wait_sec 
-									;wysw3
+									;display3
 		ldi r19,0x02 
 		ldi r20,1
 		sts var1, r19 
@@ -102,7 +102,7 @@ wyswietlanie:
 		sts var3, r16
 		call seg1 
 			call wait_sec 
-									;wysw4 
+									;display4
 		ldi r19,0x01 
 		ldi r20,0 
 		sts var1, r19 
@@ -139,26 +139,26 @@ pop r17
 pop r16   
 
 Ret  
-;podprogram wyswietlacze
+;displays
 seg1:							   
 	push r16 
 	push r17 
 	push r18  
 
-	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+	ldi zl, low(2*prime) 
 	ldi zh, high(2*prime)    
 
-	lds r16, var1 ;wyswietlacz
+	lds r16, var1 
 	com r16                     
 	out porte, r16  
 
-	ldi r16, 0 ;segment 
+	ldi r16, 0 
 	lds r18, var2 
 	cp r18, r16 
 	lds r17, var3
-	brne bezzamiany 
+	brne no_swap 
 	swap r17  
-bezzamiany: 
+no_swap: 
 	andi r17, 0x0f  
 	add zl, r17  
 	adc zh, r16 

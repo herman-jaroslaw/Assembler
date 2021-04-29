@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm Thu Apr 29 19:25:24 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.4\5.4\5.4_v2_AZ_czyste.asm Thu Apr 29 19:29:57 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1556,7 +1556,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  .ORG 0 
 000000 e008                      	ldi R16, HIGH(RAMEND)    
 000001 bf0e                      	out SPH, R16    
-000002 ef0f                      	ldi R16, LOW(RAMEND)    ;stos
+000002 ef0f                      	ldi R16, LOW(RAMEND)    ;stack
 000003 bf0d                      	out SPL, R16    
                                   
 000004 c035                      	rjmp prog_start     
@@ -1572,7 +1572,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                   .DSEG 
                                  .ORG 0x100 
 000100                           	var1: .BYTE 1  
-000101                           	var2: .BYTE 1  ;parametry do podprogramu
+000101                           	var2: .BYTE 1  ;parameters
 000102                           	var3: .BYTE 1 
                                  	.CSEG 
                                  
@@ -1582,14 +1582,14 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00003c b90a                      	out ddrd, r16
 00003d b904                      	out ddrb, r16 
                                  
-00003e ef0f                      	ldi r16, high(-100) //starsze
-00003f e91c                      	ldi r17, low(-100)	//mlodsze
+00003e ef0f                      	ldi r16, high(-100) ;MS bits
+00003f e91c                      	ldi r17, low(-100)	;LS bits
                                  	
 000040 5210                      	subi r17, 0x20
 000041 4000                      	sbci r16, 0x00
 000042 f01a                      	brmi znak
-                                 diody:
-000043 f063                          brvs przepelnienie
+                                 diodes:
+000043 f063                          brvs overflow
 000044 940c 0052                 	jmp dzielenie
                                  znak:
 000046 e0f0                      		ldi r31,0
@@ -1601,39 +1601,39 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  				
 00004c e260                              ldi r22, 0b100000  
 00004d b963                              out pinb, r22
-00004e 940c 0043                 		jmp diody															
-                                 przepelnienie:
+00004e 940c 0043                 		jmp diodes															
+                                 overflow:
 000050 e078                              ldi r23, 0b001000 
 000051 b973                              out pinb, r23 
                                  dzielenie:
                                  
                                  		;(F-32) * (1/2 + 1/16)
                                  		;dzielenie przez 1/2
-000052 9505                      	asr r16			
-000053 9517                      	ror r17												
+000052 9505                      	asr r16			;arithmetic shift right/dividing U2 number by 2/LSB (bit 0) moved to C flag
+000053 9517                      	ror r17			;all bits moved one position to right -> flag C goes to bit 7 and bit 0 goes to flag C												
 000054 2f80                      	mov r24, r16
 000055 2f91                      	mov r25, r17
-                                 		;dzielenie przez 1/8 
-000056 9505                      	asr r16			; w poni¿szych komendach wykonujê tak¹ operacjê jeszcze 3 razy
+                                 		 
+000056 9505                      	asr r16			; repeating same operation 3 times
 000057 9517                      	ror r17			
 000058 9505                      	asr r16
 000059 9517                      	ror r17
 00005a 9505                      	asr r16
 00005b 9517                      	ror r17
-00005c 0f19                      	add r17, r25	; dodajemy (1/2 + 1/16)
+00005c 0f19                      	add r17, r25	;(1/2 + 1/16)
 00005d 1f08                      	adc r16, r24	
                                  
                                  start: 
 00005e 940e 0061                 	call wyswietlanie
 000060 cfd9                      	rjmp prog_start 
                                  wyswietlanie: 
-000061 e022                      	ldi r18, 2 ; r18 sluzy aby cyfry zmienialy sie co 1/5s 
+000061 e022                      	ldi r18, 2 ; r18 -> changing numbers every 1/5s
                                  
                                  	petla: 
 000062 940e 0097                 		call wait_sec 
 000064 952a                      		dec r18 
 000065 f7e1                      	brne petla 
-                                 									 ;wysw1 
+                                 									 ;display1 
 000066 e038                      		ldi r19,0x08 
 000067 e041                      		ldi r20,1 
 000068 9330 0100                 		sts var1, r19 
@@ -1641,7 +1641,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 00006c 9310 0102                 		sts var3, r17
 00006e 940e 00ac                 		call seg1  
 000070 940e 0097                 			call wait_sec 
-                                 									;wysw2
+                                 									;display2
 000072 e034                      		ldi r19,0x04 
 000073 e040                      		ldi r20,0
 000074 9330 0100                 		sts var1, r19 
@@ -1649,7 +1649,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000078 9310 0102                 		sts var3, r17
 00007a 940e 00ac                 		call seg1 
 00007c 940e 0097                 			call wait_sec 
-                                 									;wysw3
+                                 									;display3
 00007e e032                      		ldi r19,0x02 
 00007f e041                      		ldi r20,1
 000080 9330 0100                 		sts var1, r19 
@@ -1657,7 +1657,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000084 9300 0102                 		sts var3, r16
 000086 940e 00ac                 		call seg1 
 000088 940e 0097                 			call wait_sec 
-                                 									;wysw4 
+                                 									;display4
 00008a e031                      		ldi r19,0x01 
 00008b e040                      		ldi r20,0 
 00008c 9330 0100                 		sts var1, r19 
@@ -1694,26 +1694,26 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 0000aa 910f                      pop r16   
                                  
 0000ab 9508                      Ret  
-                                 ;podprogram wyswietlacze
+                                 ;displays
                                  seg1:							   
 0000ac 930f                      	push r16 
 0000ad 931f                      	push r17 
 0000ae 932f                      	push r18  
                                  
-0000af e6e4                      	ldi zl, low(2*prime) ;mno¿enie przez dwa, celem uzyskania adresu w przestrzeni bajtowej 
+0000af e6e4                      	ldi zl, low(2*prime) 
 0000b0 e0f0                      	ldi zh, high(2*prime)    
                                  
-0000b1 9100 0100                 	lds r16, var1 ;wyswietlacz
+0000b1 9100 0100                 	lds r16, var1 
 0000b3 9500                      	com r16                     
 0000b4 b90e                      	out porte, r16  
                                  
-0000b5 e000                      	ldi r16, 0 ;segment 
+0000b5 e000                      	ldi r16, 0 
 0000b6 9120 0101                 	lds r18, var2 
 0000b8 1720                      	cp r18, r16 
 0000b9 9110 0102                 	lds r17, var3
-0000bb f409                      	brne bezzamiany 
+0000bb f409                      	brne no_swap 
 0000bc 9512                      	swap r17  
-                                 bezzamiany: 
+                                 no_swap: 
 0000bd 701f                      	andi r17, 0x0f  
 0000be 0fe1                      	add zl, r17  
 0000bf 1ff0                      	adc zh, r16 
