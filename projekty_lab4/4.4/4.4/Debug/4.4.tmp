@@ -22,7 +22,7 @@
   <FILE>4.4.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <ustawianie><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm</FILE><LINE>12</LINE></ustawianie>
+  <setting><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm</FILE><LINE>12</LINE></setting>
   <prime><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm</FILE><LINE>10</LINE></prime>
   <reset><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm</FILE><LINE>23</LINE></reset>
   <start><FILE>C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm</FILE><LINE>27</LINE></start>

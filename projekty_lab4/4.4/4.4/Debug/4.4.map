@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Wed Apr 28 20:01:48 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Thu Apr 29 17:02:13 2021
 
 
 EQU  SIGNATURE_000 0000001e
@@ -1146,7 +1146,7 @@ EQU  TIMER4_COMPAaddr 00000054
 EQU  TIMER4_COMPBaddr 00000056
 EQU  TIMER4_OVFaddr 00000058
 EQU  INT_VECTORS_SIZE 0000005a
-CSEG ustawianie   0000003a
+CSEG setting      0000003a
 CSEG prime        00000032
 CSEG reset        00000041
 CSEG start        00000043

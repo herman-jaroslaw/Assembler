@@ -5,27 +5,27 @@
 ;port e - 7hex control
 
 .org 0x00 
-rjmp ustawianie
+rjmp setting
 .org 0x32
 prime: .DB 0x7E, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7f, 0x7b, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47
 
-ustawianie: 
+setting: 
 
-	ldi r16, high(ramend)	;stos
+	ldi r16, high(ramend)	;stack
     out sph, r16		
     ldi r16, low(ramend)
     out spl, r16	
 
-	ldi r16, $ff			;ustawianie portów
+	ldi r16, $ff			;port set
 	out ddrd, r16
 	out ddre, r16
 
 reset:
-	ldi r20, 0x00			; ustawianie licznika
+	ldi r20, 0x00			; counter set
 	ldi r21, 0x00
 
 start:
-		call display		; licznik
+		call display		; counter
 		inc r20
 		brne start
 		inc r21
@@ -48,7 +48,7 @@ delay:             ; delay =  1/20s
         pop r16
 ret
 
-display:			; wyœwietlanie zawartoœci licznika w formie podprogramu (pkt 3)
+display:			; wyswietlanie zawartoœci licznika w formie podprogramu (pkt 3)
 	ldi r26, 3		;cztery okresy odswiezajace LED (f modyfikacji licznika = 1/5 s, bo 4*1/20=1/5)
 	wait:				; czestotliwosc modyfikacji licznika
 		

@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Wed Apr 28 20:01:48 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab4\4.4\4.4\main.asm Thu Apr 29 17:02:13 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1553,7 +1553,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  ;port e - 7hex control
                                  
                                  .org 0x00 
-000000 c039                      rjmp ustawianie
+000000 c039                      rjmp setting
                                  .org 0x32
 000032 307e
 000033 796d
@@ -1564,23 +1564,23 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000038 3d4e
 000039 474f                      prime: .DB 0x7E, 0x30, 0x6d, 0x79, 0x33, 0x5b, 0x5f, 0x70, 0x7f, 0x7b, 0x77, 0x1f, 0x4e, 0x3d, 0x4f, 0x47
                                  
-                                 ustawianie: 
+                                 setting: 
                                  
-00003a e008                      	ldi r16, high(ramend)	;stos
+00003a e008                      	ldi r16, high(ramend)	;stack
 00003b bf0e                          out sph, r16		
 00003c ef0f                          ldi r16, low(ramend)
 00003d bf0d                          out spl, r16	
                                  
-00003e ef0f                      	ldi r16, $ff			;ustawianie portów
+00003e ef0f                      	ldi r16, $ff			;port set
 00003f b90a                      	out ddrd, r16
 000040 b90d                      	out ddre, r16
                                  
                                  reset:
-000041 e040                      	ldi r20, 0x00			; ustawianie licznika
+000041 e040                      	ldi r20, 0x00			; counter set
 000042 e050                      	ldi r21, 0x00
                                  
                                  start:
-000043 940e 0056                 		call display		; licznik
+000043 940e 0056                 		call display		; counter
 000045 9543                      		inc r20
 000046 f7e1                      		brne start
 000047 9553                      		inc r21
@@ -1603,7 +1603,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000054 910f                              pop r16
 000055 9508                      ret
                                  
-                                 display:			; wyœwietlanie zawartoœci licznika w formie podprogramu (pkt 3)
+                                 display:			; wyswietlanie zawartoœci licznika w formie podprogramu (pkt 3)
 000056 e0a3                      	ldi r26, 3		;cztery okresy odswiezajace LED (f modyfikacji licznika = 1/5 s, bo 4*1/20=1/5)
                                  	wait:				; czestotliwosc modyfikacji licznika
                                  		
@@ -1622,7 +1622,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                  
 00006b 9508                      	ret
                                  
-                                 seg1:							;najstarszy segment
+                                 seg1:							;najstarszy segment, using r20
 00006c 934f                      	push r20
 00006d 935f                      	push r21
                                  
@@ -1633,17 +1633,17 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000071 9540                      	com r20						;odwrocenie wartosci rejestru r20
 000072 b94e                      	out porte, r20				;wysterowanie portu sterujacego zerami w celu uaktywnienia segmentu
                                  
-000073 9552                      	swap r21					;zamiana miejscami polowek bajtu
+000073 9552                      	swap r21					;zamiana miejscami polowek bajtu 
 000074 705f                      	andi r21, 0x0f				;isolation of less significant byte half
-000075 0fe5                      	add zl, r21					;adding value stored in r21 to zl (r30)
-000076 9144                      	lpm r20, z					;loading value from z register (r30 and r31) to r20
+000075 0fe5                      	add zl, r21					;adding value stored in r21 to zl (r30) 
+000076 9144                      	lpm r20, z					;loading value from z register (r30 and r31) to r20 (starting from 1st value in prime list)
 000077 9540                      	com r20						;inverting values in r20
 000078 b94b                      	out portd, r20				;
                                  
 000079 915f                      	pop r21
 00007a 914f                      	pop r20
 00007b 9508                      	ret
-                                 seg2:
+                                 seg2:						;using r20
 00007c 934f                      	push r20
 00007d 935f                      	push r21
                                  
@@ -1664,7 +1664,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000088 915f                      	pop r21
 000089 914f                      	pop r20 
 00008a 9508                      	ret
-                                 seg3:
+                                 seg3:			;using r21
 00008b 934f                      	push r20
 00008c 935f                      	push r21
                                  
@@ -1686,7 +1686,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000098 915f                      	pop r21
 000099 914f                      	pop r20
 00009a 9508                      	ret
-                                 seg4:
+                                 seg4:				;using r21
 00009b 934f                      	push r20
 00009c 935f                      	push r21
                                  
