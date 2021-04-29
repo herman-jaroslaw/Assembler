@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.1_v0\7.1_v0\main.asm Mon Apr 26 20:39:58 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.1_v0\7.1_v0\main.asm Thu Apr 29 17:13:56 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.1_v0\7.1_v0\main.asm(9): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328pbdef.inc'
@@ -1602,7 +1602,7 @@ C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\lab7\7.1_v0\7.1_v0\ma
 000009 9a5a                      	sbi portd, 2 ;pull-up enable for portd.2 
 00000a e041                      	ldi r20, (1<<int0) 
 00000b bb4d                      	out eimsk, r20 ;enable int0 
-00000c e041                      	ldi r20, (0<<isc01)|(1<<isc00)
+00000c e042                      	ldi r20, (1<<isc01)|(0<<isc00)
 00000d 9340 0069                 	sts eicra, r20 ;set int0 active on falling edge 
 00000f 9478                      	sei ;enable interrupts 
                                  stop: 

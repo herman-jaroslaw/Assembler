@@ -10,7 +10,7 @@
 
 .org 0 
 	jmp main ;skip vector table 
-.org INT0addr
+.org INT0addr											;External Interrupt Request 0
 	jmp int0_isr 
 ;------- main ---------- 
 main: 
@@ -32,6 +32,6 @@ stop:
 int0_isr: 
 	in r21, pinb ;read portb
 	ldi r22, 0x20 
-	eor r21, r22 ;toggle bit 5 
+	eor r21, r22 ;toggle (przelacz) bit 5 
 	out portb,r21 
 	reti
