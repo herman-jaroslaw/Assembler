@@ -17,7 +17,7 @@
  .DSEG 
 .ORG 0x100 
 	var1: .BYTE 1  
-	var2: .BYTE 1	;parametry do podprogramu
+	var2: .BYTE 1	;parameters
 	var3: .BYTE 1 
 	.CSEG 
 
@@ -37,6 +37,7 @@ prog_start:
     brvs overflow					; 254 - 1 = 253 = HEX FD
 	brmi znak						; WYŒWIETLANY WYNIK: D420 = DEC 54 304,				;0000 0010 0100 1101
 	rjmp start
+
 znak:
 		ldi r31,0
 		ldi r30,1
@@ -58,9 +59,10 @@ both:
         out portb, r23
 	
 start:
-	call wyswietlanie 
+	call displaying 
 	rjmp prog_start 
-wyswietlanie: 
+
+displaying: 
 	ldi r18, 2 
 	petla: 
 		call wait_sec 

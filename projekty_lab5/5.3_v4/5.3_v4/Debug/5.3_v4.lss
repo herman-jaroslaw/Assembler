@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm Thu Apr 29 19:40:20 2021
+AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\projekty_lab5\5.3_v4\5.3_v4\5.3_v4.asm Thu Apr 29 19:45:51 2021
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\avrasm\inc\m328PBdef.inc'
@@ -1572,7 +1572,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
                                   .DSEG 
                                  .ORG 0x100 
 000100                           	var1: .BYTE 1  
-000101                           	var2: .BYTE 1	;parametry do podprogramu
+000101                           	var2: .BYTE 1	;parameters
 000102                           	var3: .BYTE 1 
                                  	.CSEG 
                                  
@@ -1592,6 +1592,7 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000042 f063                          brvs overflow					; 254 - 1 = 253 = HEX FD
 000043 f00a                      	brmi znak						; WYŒWIETLANY WYNIK: D420 = DEC 54 304,				;0000 0010 0100 1101
 000044 c010                      	rjmp start
+                                 
                                  znak:
 000045 e0f0                      		ldi r31,0
 000046 e0e1                      		ldi r30,1
@@ -1613,9 +1614,10 @@ AVRASM ver. 2.2.8  C:\Users\Jaro\Dropbox\studies\projects\Assembler\Assembler\pr
 000054 b975                              out portb, r23
                                  	
                                  start:
-000055 940e 0058                 	call wyswietlanie 
+000055 940e 0058                 	call displaying 
 000057 cfe2                      	rjmp prog_start 
-                                 wyswietlanie: 
+                                 
+                                 displaying: 
 000058 e022                      	ldi r18, 2 
                                  	petla: 
 000059 940e 008e                 		call wait_sec 
