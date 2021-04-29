@@ -146,8 +146,8 @@ seg1:
 	lds r18, var2 
 	cp r18, r16 
 	lds r17, var3
-	brne noswap 
-	swap r17  
+	brne noswap				;if noswap pomiñ swap r17
+	swap r17				;if swap go to noswap
 noswap: 
 	andi r17, 0x0f  
 	add zl, r17  

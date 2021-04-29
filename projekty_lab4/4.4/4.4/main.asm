@@ -99,7 +99,7 @@ seg2:						;using r20
 	com r20
 	out porte, r20
 
-
+	; this time without swapping because we focus on the other nibble
 	andi r21, 0x0f
 	add zl, r21
 	lpm r20, z
