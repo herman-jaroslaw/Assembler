@@ -27,8 +27,8 @@ prog_start:
 	out ddrd, r16
 	out ddrb, r16 
 
-	ldi r16, high(-100) ;MS bits
-	ldi r17, low(-100)	;LS bits
+	ldi r16, high(1000) ;MS bits
+	ldi r17, low(1000)	;LS bits
 	
 	subi r17, 0x20
 	sbci r16, 0x00
